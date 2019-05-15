@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.craftersland.itemrestrict.ItemRestrict;
 import net.craftersland.itemrestrict.RestrictedItemsHandler.ActionType;
-import net.craftersland.itemrestrict.utils.MaterialData;
+import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class Drop implements Listener {
 	
@@ -19,17 +19,16 @@ public class Drop implements Listener {
 		this.ir = ir;
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onItemDrop(PlayerDropItemEvent event) {
 		if (ir.getConfigHandler().getBoolean("General.Restrictions.DropBans") == true) {
 			Player p = event.getPlayer();
 			ItemStack item = event.getItemDrop().getItemStack();
 			
-			MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Ownership, p, item.getTypeId(), item.getDurability(), p.getLocation());
+			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Ownership, p, item.getType(), /*item.getDurability(), */p.getLocation());
 			
 			if (bannedInfo == null) {
-				MaterialData bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Drop, p, item.getTypeId(), item.getDurability(), p.getLocation());
+				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Drop, p, item.getType(), /*item.getDurability(), */p.getLocation());
 				
 				if (bannedInfo2 != null) {
 					event.setCancelled(true);

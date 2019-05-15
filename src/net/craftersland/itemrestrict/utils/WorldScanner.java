@@ -25,16 +25,16 @@ public class WorldScanner {
 		//start the repeating scan for banned items in loaded chunks
 		//runs every minute and scans 5% of loaded chunks.
 		int delay = ir.getConfigHandler().getInteger("General.WorldScannerDelay") * 60;
-		
+			
 		BukkitTask task = Bukkit.getScheduler().runTaskTimerAsynchronously(ir, new Runnable() {
 			public void run() {
 				ItemRestrict.log.info("WorldScanner Task Started...");
 				ArrayList<World> worlds;
 				if(ir.worldBanned.size() > 0) {
-					if (ir.enforcementWorlds.size() == 0) {
+					if (ItemRestrict.enforcementWorlds.size() == 0) {
 						worlds = (ArrayList<World>) Bukkit.getServer().getWorlds();
 					} else {
-						worlds = ir.enforcementWorlds;
+						worlds = ItemRestrict.enforcementWorlds;
 					}
 					
 					for(int i = 0; i < worlds.size(); i++) {
@@ -76,14 +76,13 @@ public class WorldScanner {
 		ir.worldScanner.put(true, task.getTaskId());
 	}
 	
-	@SuppressWarnings("deprecation")
 	private void removeBlock(final Block block) {
-		MaterialData materialInfo = new MaterialData(block.getTypeId(), block.getData(), null, null);
-		MaterialData bannedInfo = ir.worldBanned.Contains(materialInfo);
+		RestrictedItem materialInfo = new RestrictedItem(block.getType(), /*block.getData(), */null, null);
+		RestrictedItem bannedInfo = ir.worldBanned.Contains(materialInfo);
 		boolean removeSkull = false;
 		if (bannedInfo == null) {
 			if (ir.getConfigHandler().getBoolean("General.RemoveSkulls") == true) {
-				if (block.getType() == Material.SKULL) {
+				if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD) {
 					removeSkull = true;
 				}
 			}

@@ -1,9 +1,9 @@
 name: ItemRestrict
 main: net.craftersland.itemrestrict.ItemRestrict
-version: 2.4.1
-author: CraftersLand
+version: 2.4.2
+api-version: 1.14
+authors: [CraftersLand, Electro2560]
 load: POSTWORLD
-website: www.craftersland.net
 description: Item Restrict system.
 commands:
     itemrestrict:

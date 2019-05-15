@@ -7,7 +7,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 import net.craftersland.itemrestrict.ItemRestrict;
 import net.craftersland.itemrestrict.RestrictedItemsHandler.ActionType;
-import net.craftersland.itemrestrict.utils.MaterialData;
+import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class Placement implements Listener {
 	
@@ -17,11 +17,10 @@ public class Placement implements Listener {
 		this.ir = ir;
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onInteract(BlockPlaceEvent event) {
 		if (ir.placementBanned.size() != 0) {	
-			MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Placement, event.getPlayer(), event.getItemInHand().getTypeId(), event.getItemInHand().getDurability(), event.getPlayer().getLocation());
+			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Placement, event.getPlayer(), event.getItemInHand().getType(), /*event.getItemInHand().getDurability(), */event.getPlayer().getLocation());
 			
 			if (bannedInfo != null) {
 				event.setCancelled(true);
@@ -31,7 +30,7 @@ public class Placement implements Listener {
 				ir.getSoundHandler().sendEndermanTeleportSound(event.getPlayer());
 				ir.getConfigHandler().printMessage(event.getPlayer(), "chatMessages.placementRestricted", bannedInfo.reason);
 			} else if (ir.is19Server == true) {
-				MaterialData bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Placement, event.getPlayer(), event.getPlayer().getInventory().getItemInOffHand().getTypeId(), event.getPlayer().getInventory().getItemInOffHand().getDurability(), event.getPlayer().getLocation());
+				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Placement, event.getPlayer(), event.getPlayer().getInventory().getItemInOffHand().getType(), /*event.getPlayer().getInventory().getItemInOffHand().getDurability(), */event.getPlayer().getLocation());
 				if (bannedInfo2 != null) {
 					event.setCancelled(true);
 					ir.getSoundHandler().sendEndermanTeleportSound(event.getPlayer());

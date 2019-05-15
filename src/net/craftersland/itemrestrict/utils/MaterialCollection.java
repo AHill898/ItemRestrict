@@ -5,29 +5,30 @@ import java.util.List;
 
 public class MaterialCollection {
 	
-	List<MaterialData> materials = new ArrayList<MaterialData>();
+	List<RestrictedItem> materials = new ArrayList<RestrictedItem>();
 	
-	public void Add(MaterialData material)
+	public void Add(RestrictedItem restrictedItem)
 	{
-		int i;
-		for(i = 0; i < this.materials.size() && this.materials.get(i).typeID <= material.typeID; i++);
-		this.materials.add(i, material);
+		/*int i;
+		for(i = 0; i < this.materials.size() && this.materials.get(i).material <= material.material; i++);
+		this.materials.add(i, material);*/
+		materials.add(restrictedItem);
 	}
 	
 	//returns a MaterialInfo complete with the friendly material name from the config file
-	public MaterialData Contains(MaterialData material)
+	public RestrictedItem Contains(RestrictedItem material)
 	{
 		for(int i = 0; i < this.materials.size(); i++)
 		{
-			MaterialData thisMaterial = this.materials.get(i);
-			if(material.typeID == thisMaterial.typeID && (thisMaterial.allDataValues || material.data == thisMaterial.data))
+			RestrictedItem thisMaterial = this.materials.get(i);
+			if(material.material == thisMaterial.material/* && (thisMaterial.allDataValues || material.data == thisMaterial.data)*/)
 			{
 				return thisMaterial;
 			}
-			else if(thisMaterial.typeID > material.typeID)
+			/*else if(thisMaterial.material > material.material)
 			{
 				return null;				
-			}
+			}*/
 		}
 			
 		return null;

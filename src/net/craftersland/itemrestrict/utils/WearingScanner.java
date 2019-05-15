@@ -20,7 +20,6 @@ public class WearingScanner {
 		public void wearingScanTask() {
 			
 			BukkitTask task = Bukkit.getScheduler().runTaskTimerAsynchronously(ir, new Runnable() {
-				@SuppressWarnings("deprecation")
 				@Override
 				public void run() {
 					for (final Player p : Bukkit.getOnlinePlayers()) {
@@ -30,7 +29,7 @@ public class WearingScanner {
 						final ItemStack helmet = p.getInventory().getHelmet();
 						
 						if (boots != null) {
-							MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Wearing, p, boots.getTypeId(), boots.getData().getData(), p.getLocation());
+							RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Wearing, p, boots.getType(), /*boots.getData().getData(), */p.getLocation());
 							if (bannedInfo != null) {
 								ir.getConfigHandler().printMessage(p, "chatMessages.wearingRestricted", bannedInfo.reason);
 								Bukkit.getScheduler().runTask(ir, new Runnable() {
@@ -45,7 +44,7 @@ public class WearingScanner {
 							}
 						}
 						if (leggings != null) {
-							MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Wearing, p, leggings.getTypeId(), leggings.getData().getData(), p.getLocation());
+							RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Wearing, p, leggings.getType(), /*leggings.getData().getData(), */p.getLocation());
 							if (bannedInfo != null) {
 								ir.getConfigHandler().printMessage(p, "chatMessages.wearingRestricted", bannedInfo.reason);
 								Bukkit.getScheduler().runTask(ir, new Runnable() {
@@ -60,7 +59,7 @@ public class WearingScanner {
 							}
 						}
 						if (chestplate != null) {
-							MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Wearing, p, chestplate.getTypeId(), chestplate.getData().getData(), p.getLocation());
+							RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Wearing, p, chestplate.getType(), /*chestplate.getData().getData(), */p.getLocation());
 							if (bannedInfo != null) {
 								ir.getConfigHandler().printMessage(p, "chatMessages.wearingRestricted", bannedInfo.reason);
 								Bukkit.getScheduler().runTask(ir, new Runnable() {
@@ -75,7 +74,7 @@ public class WearingScanner {
 							}
 						}
 						if (helmet != null) {
-							MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Wearing, p, helmet.getTypeId(), helmet.getData().getData(), p.getLocation());
+							RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Wearing, p, helmet.getType(), /*helmet.getData().getData(), */p.getLocation());
 							if (bannedInfo != null) {
 								ir.getConfigHandler().printMessage(p, "chatMessages.wearingRestricted", bannedInfo.reason);
 								Bukkit.getScheduler().runTask(ir, new Runnable() {

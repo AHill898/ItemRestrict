@@ -2,7 +2,7 @@ package net.craftersland.itemrestrict.restrictions;
 
 import net.craftersland.itemrestrict.ItemRestrict;
 import net.craftersland.itemrestrict.RestrictedItemsHandler.ActionType;
-import net.craftersland.itemrestrict.utils.MaterialData;
+import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 import org.bukkit.block.Furnace;
 import org.bukkit.entity.Player;
@@ -20,7 +20,6 @@ public class Smelting implements Listener {
 		this.ir = ir;
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	private void onItemCrafted(FurnaceSmeltEvent event) {
 		ItemStack item = event.getSource();
@@ -28,7 +27,7 @@ public class Smelting implements Listener {
 		if (f.getInventory().getViewers().isEmpty() == false) {
 			Player p = (Player) f.getInventory().getViewers().get(0);
 			
-			MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Smelting, p, item.getTypeId(), item.getDurability(), p.getLocation());
+			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Smelting, p, item.getType(), /*item.getDurability(), */p.getLocation());
 			
 			if (bannedInfo != null) {
 				event.setCancelled(true);
@@ -37,7 +36,7 @@ public class Smelting implements Listener {
 				ir.getConfigHandler().printMessage(p, "chatMessages.smeltingRestricted", bannedInfo.reason);
 			}
 		} else {
-            MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Smelting, null, item.getTypeId(), item.getDurability(), null);
+            RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Smelting, null, item.getType(), /*item.getDurability(), */null);
 			
 			if (bannedInfo != null) {
 				event.setCancelled(true);

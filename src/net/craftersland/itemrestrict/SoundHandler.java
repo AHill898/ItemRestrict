@@ -24,7 +24,7 @@ public class SoundHandler {
 	public void sendEndermanTeleportSound(Player p) {
 		if (pd.getConfigHandler().getBoolean("General.Sounds.onRestrictions") == true) {
 			if (pd.is19Server == true) {
-				p.playSound(p.getLocation(), Sound.ENTITY_ENDERMEN_TELEPORT, 1, 1);
+				p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 1);
 			} else {
 				p.playSound(p.getLocation(), Sound.valueOf("ENDERMAN_TELEPORT"), 1, 1);
 			}
@@ -44,7 +44,7 @@ public class SoundHandler {
 	public void sendPlingSound(Player p) {
 		if (pd.getConfigHandler().getBoolean("General.Sounds.onRestrictions") == true) {
 			if (pd.is19Server == true) {
-				p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, 3F, 3F);
+				p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 3F, 3F);
 			} else {
 				p.playSound(p.getLocation(), Sound.valueOf("NOTE_PLING"), 3F, 3F);
 			}

@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.craftersland.itemrestrict.ItemRestrict;
 import net.craftersland.itemrestrict.RestrictedItemsHandler.ActionType;
-import net.craftersland.itemrestrict.utils.MaterialData;
+import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class BlockBreak implements Listener {
 	
@@ -18,7 +18,6 @@ public class BlockBreak implements Listener {
 		this.ir = ir;
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onBlockBreak(BlockBreakEvent event) {
 		if (ir.blockBreakBanned.size() != 0) {
@@ -26,15 +25,15 @@ public class BlockBreak implements Listener {
 			ItemStack itemToDrop = null;
 			if (event.getBlock().getDrops().iterator().hasNext() == true) {
 				itemToDrop = event.getBlock().getDrops().iterator().next();
-				if (event.getBlock().getTypeId() == itemToDrop.getTypeId()) {
+				if (event.getBlock().getType() == itemToDrop.getType()) {
 					compareDrops = true;
 				}
 			}
-			MaterialData bannedInfo = null;
+			RestrictedItem bannedInfo = null;
 			if (compareDrops == false) {
-				bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.BlockBreak, event.getPlayer(), event.getBlock().getTypeId(), event.getBlock().getState().getData().getData(), event.getPlayer().getLocation());
+				bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.BlockBreak, event.getPlayer(), event.getBlock().getType(), /*event.getBlock().getState().getData().getData(), */event.getPlayer().getLocation());
 			} else if (itemToDrop != null) {
-				bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.BlockBreak, event.getPlayer(), itemToDrop.getTypeId(), itemToDrop.getDurability(), event.getPlayer().getLocation());
+				bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.BlockBreak, event.getPlayer(), itemToDrop.getType(), /*itemToDrop.getDurability(), */event.getPlayer().getLocation());
 			}
 			
 			if (bannedInfo != null) {

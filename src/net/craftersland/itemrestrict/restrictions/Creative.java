@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.craftersland.itemrestrict.ItemRestrict;
 import net.craftersland.itemrestrict.RestrictedItemsHandler.ActionType;
-import net.craftersland.itemrestrict.utils.MaterialData;
+import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class Creative implements Listener {
 	
@@ -22,7 +22,6 @@ public class Creative implements Listener {
 		this.ir = ir;
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onCreativeEvents(InventoryCreativeEvent event) {
 		if (ir.getConfigHandler().getBoolean("General.Restrictions.CreativeBans") == true) {
@@ -30,10 +29,10 @@ public class Creative implements Listener {
 			
 			if (cursorItem != null) {
 				Player p = (Player) event.getWhoClicked();
-				MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Ownership, p, cursorItem.getTypeId(), cursorItem.getDurability(), p.getLocation());
+				RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Ownership, p, cursorItem.getType(), /*cursoritem.getDurability(), */p.getLocation());
 				
 				if (bannedInfo == null) {
-					MaterialData bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Creative, p, cursorItem.getTypeId(), cursorItem.getDurability(), p.getLocation());
+					RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Creative, p, cursorItem.getType(), /*cursoritem.getDurability(), */p.getLocation());
 					
 					if (bannedInfo2 != null) {
 						event.setCancelled(true);
@@ -47,7 +46,6 @@ public class Creative implements Listener {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onItemClicked(InventoryClickEvent event) {
 		if (ir.getConfigHandler().getBoolean("General.Restrictions.CreativeBans") == true) {
@@ -57,10 +55,10 @@ public class Creative implements Listener {
 					if (p.getGameMode() == GameMode.CREATIVE) {
 						ItemStack currentItem = event.getCurrentItem();
 						
-						MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Ownership, p, currentItem.getTypeId(), currentItem.getDurability(), p.getLocation());
+						RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Ownership, p, currentItem.getType(), /*currentitem.getDurability(), */p.getLocation());
 						
 						if (bannedInfo == null) {
-							MaterialData bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Creative, p, currentItem.getTypeId(), currentItem.getDurability(), p.getLocation());
+							RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Creative, p, currentItem.getType(), /*currentitem.getDurability(), */p.getLocation());
 							
 							if (bannedInfo2 != null) {
 								event.setCancelled(true);
@@ -83,10 +81,10 @@ public class Creative implements Listener {
 		if (p.getGameMode() == GameMode.CREATIVE) {
 			ItemStack item = p.getItemInHand();
 			
-			MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Ownership, p, item.getTypeId(), item.getDurability(), p.getLocation());
+			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Ownership, p, item.getType(), /*item.getDurability(), */p.getLocation());
 			
 			if (bannedInfo == null) {
-				MaterialData bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Creative, p, item.getTypeId(), item.getDurability(), p.getLocation());
+				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Creative, p, item.getType(), /*item.getDurability(), */p.getLocation());
 				
 				if (bannedInfo2 != null) {
 					event.setCancelled(true);

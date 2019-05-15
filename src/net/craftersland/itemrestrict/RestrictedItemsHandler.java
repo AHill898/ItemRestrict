@@ -3,13 +3,14 @@ package net.craftersland.itemrestrict;
 import java.io.File;
 import java.util.List;
 
-import net.craftersland.itemrestrict.utils.MaterialCollection;
-import net.craftersland.itemrestrict.utils.MaterialData;
-
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+
+import net.craftersland.itemrestrict.utils.MaterialCollection;
+import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class RestrictedItemsHandler {
 	
@@ -147,25 +148,25 @@ public class RestrictedItemsHandler {
 		//for each string in the list
 		for(int i = 0; i < stringsToParse.size(); i++) {
 			//try to parse the string value into a material info
-			MaterialData materialData = MaterialData.fromString(stringsToParse.get(i));
+			RestrictedItem restrictedItem = RestrictedItem.fromString(stringsToParse.get(i));
 			
 			//null value returned indicates an error parsing the string from the config file
-			if(materialData == null) {
+			if(restrictedItem == null) {
 				//show error in log
 				ItemRestrict.log.warning("ERROR: Unable to read material entry: " + stringsToParse.get(i) + " ,from RestrictedItems.yml file.");
 			}
 			
 			//otherwise store the valid entry in config data
 			else {
-				materialCollection.Add(materialData);
+				materialCollection.Add(restrictedItem);
 			}
 		}		
 	}
 	
-	public MaterialData isBanned(ActionType actionType, Player player, int typeId, short data, Location location) {
+	public RestrictedItem isBanned(ActionType actionType, Player player, Material material, /*short data, */Location location) {
 		if (itemrestrict.getConfigHandler().getString("General.EnableOnAllWorlds") != "true") {
 			if (location != null) {
-				if(!itemrestrict.enforcementWorlds.contains(location.getWorld())) return null;
+				if(!ItemRestrict.enforcementWorlds.contains(location.getWorld())) return null;
 			}
 		}
 		if (player != null && player.hasPermission("ItemRestrict.admin") || player != null && player.hasPermission("ItemRestrict.bypass")) return null;
@@ -202,17 +203,17 @@ public class RestrictedItemsHandler {
 			collectionToSearch = itemrestrict.smeltingBanned;
 			permissionNode = "smelt";
 		} else {
-			collectionToSearch = itemrestrict.ownershipBanned;
+			collectionToSearch = ItemRestrict.ownershipBanned;
 			permissionNode = "own";
 		}
 		
-		MaterialData bannedInfo = collectionToSearch.Contains(new MaterialData(typeId, data, null, null));
+		RestrictedItem bannedInfo = collectionToSearch.Contains(new RestrictedItem(material, /*data, */null, null));
 		if(bannedInfo != null) {
 			if (player == null) return bannedInfo;
-			if(player.hasPermission("ItemRestrict.bypass." + typeId + ".*.*")) return null;
-			if(player.hasPermission("ItemRestrict.bypass." + typeId + ".*." + permissionNode)) return null;
-			if(player.hasPermission("ItemRestrict.bypass." + typeId + "." + data + "." + permissionNode)) return null;			
-			if(player.hasPermission("ItemRestrict.bypass." + typeId + "." + data + ".*")) return null;
+			if(player.hasPermission("ItemRestrict.bypass." + material + ".*.*")) return null;
+			if(player.hasPermission("ItemRestrict.bypass." + material + ".*." + permissionNode)) return null;
+			//if(player.hasPermission("ItemRestrict.bypass." + material + "." + data + "." + permissionNode)) return null;			
+			//if(player.hasPermission("ItemRestrict.bypass." + material + "." + data + ".*")) return null;
 			
 			return bannedInfo;
 		}

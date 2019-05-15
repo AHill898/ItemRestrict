@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import net.craftersland.itemrestrict.ItemRestrict;
 import net.craftersland.itemrestrict.RestrictedItemsHandler.ActionType;
-import net.craftersland.itemrestrict.utils.MaterialData;
+import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class Brewing implements Listener {
 	
@@ -182,7 +182,7 @@ public class Brewing implements Listener {
 				ItemStack item2 = event.getContents().getItem(2);
 				//Check slot 0 for banned items
 				if (item0 != null) {
-					MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Brewing, player, item0.getTypeId(), item0.getData().getData(), event.getBlock().getLocation());
+					RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Brewing, player, item0.getType(), /*item0.getData().getData(), */event.getBlock().getLocation());
 					
 					if (bannedInfo != null) {
 						
@@ -196,7 +196,7 @@ public class Brewing implements Listener {
 				}
 				//Check slot 1 for banned items
 				if (item1 != null) {
-					MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Brewing, player, item1.getTypeId(), item1.getData().getData(), event.getBlock().getLocation());
+					RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Brewing, player, item1.getType(), /*item1.getData().getData(), */event.getBlock().getLocation());
 					
 					if(bannedInfo != null) {
 						
@@ -210,7 +210,7 @@ public class Brewing implements Listener {
 				}
 				//Check slot 2 for banned items
 				if (item2 != null) {
-					MaterialData bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Brewing, player, item2.getTypeId(), item2.getData().getData(), event.getBlock().getLocation());
+					RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Brewing, player, item2.getType(), /*item2.getData().getData(), */event.getBlock().getLocation());
 					
 					if (bannedInfo != null) {
 						
