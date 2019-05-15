@@ -182,7 +182,7 @@ public class Brewing implements Listener {
 				ItemStack item2 = event.getContents().getItem(2);
 				//Check slot 0 for banned items
 				if (item0 != null) {
-					RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Brewing, player, item0.getType(), /*item0.getData().getData(), */event.getBlock().getLocation());
+					RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.BREWING, player, item0.getType(), /*item0.getData().getData(), */event.getBlock().getLocation());
 					
 					if (bannedInfo != null) {
 						
@@ -196,7 +196,7 @@ public class Brewing implements Listener {
 				}
 				//Check slot 1 for banned items
 				if (item1 != null) {
-					RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Brewing, player, item1.getType(), /*item1.getData().getData(), */event.getBlock().getLocation());
+					RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.BREWING, player, item1.getType(), /*item1.getData().getData(), */event.getBlock().getLocation());
 					
 					if(bannedInfo != null) {
 						
@@ -210,7 +210,7 @@ public class Brewing implements Listener {
 				}
 				//Check slot 2 for banned items
 				if (item2 != null) {
-					RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Brewing, player, item2.getType(), /*item2.getData().getData(), */event.getBlock().getLocation());
+					RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.BREWING, player, item2.getType(), /*item2.getData().getData(), */event.getBlock().getLocation());
 					
 					if (bannedInfo != null) {
 						

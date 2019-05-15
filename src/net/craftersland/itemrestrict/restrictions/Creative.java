@@ -29,10 +29,10 @@ public class Creative implements Listener {
 			
 			if (cursorItem != null) {
 				Player p = (Player) event.getWhoClicked();
-				RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Ownership, p, cursorItem.getType(), /*cursoritem.getDurability(), */p.getLocation());
+				RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, p, cursorItem.getType(), /*cursoritem.getDurability(), */p.getLocation());
 				
 				if (bannedInfo == null) {
-					RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Creative, p, cursorItem.getType(), /*cursoritem.getDurability(), */p.getLocation());
+					RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.CREATIVE, p, cursorItem.getType(), /*cursoritem.getDurability(), */p.getLocation());
 					
 					if (bannedInfo2 != null) {
 						event.setCancelled(true);
@@ -55,10 +55,10 @@ public class Creative implements Listener {
 					if (p.getGameMode() == GameMode.CREATIVE) {
 						ItemStack currentItem = event.getCurrentItem();
 						
-						RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Ownership, p, currentItem.getType(), /*currentitem.getDurability(), */p.getLocation());
+						RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, p, currentItem.getType(), /*currentitem.getDurability(), */p.getLocation());
 						
 						if (bannedInfo == null) {
-							RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Creative, p, currentItem.getType(), /*currentitem.getDurability(), */p.getLocation());
+							RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.CREATIVE, p, currentItem.getType(), /*currentitem.getDurability(), */p.getLocation());
 							
 							if (bannedInfo2 != null) {
 								event.setCancelled(true);
@@ -81,10 +81,10 @@ public class Creative implements Listener {
 		if (p.getGameMode() == GameMode.CREATIVE) {
 			ItemStack item = p.getItemInHand();
 			
-			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Ownership, p, item.getType(), /*item.getDurability(), */p.getLocation());
+			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, p, item.getType(), /*item.getDurability(), */p.getLocation());
 			
 			if (bannedInfo == null) {
-				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Creative, p, item.getType(), /*item.getDurability(), */p.getLocation());
+				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.CREATIVE, p, item.getType(), /*item.getDurability(), */p.getLocation());
 				
 				if (bannedInfo2 != null) {
 					event.setCancelled(true);

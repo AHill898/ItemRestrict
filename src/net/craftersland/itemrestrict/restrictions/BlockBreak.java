@@ -31,9 +31,9 @@ public class BlockBreak implements Listener {
 			}
 			RestrictedItem bannedInfo = null;
 			if (compareDrops == false) {
-				bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.BlockBreak, event.getPlayer(), event.getBlock().getType(), /*event.getBlock().getState().getData().getData(), */event.getPlayer().getLocation());
+				bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.BLOCKBREAK, event.getPlayer(), event.getBlock().getType(), /*event.getBlock().getState().getData().getData(), */event.getPlayer().getLocation());
 			} else if (itemToDrop != null) {
-				bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.BlockBreak, event.getPlayer(), itemToDrop.getType(), /*itemToDrop.getDurability(), */event.getPlayer().getLocation());
+				bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.BLOCKBREAK, event.getPlayer(), itemToDrop.getType(), /*itemToDrop.getDurability(), */event.getPlayer().getLocation());
 			}
 			
 			if (bannedInfo != null) {

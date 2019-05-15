@@ -26,7 +26,7 @@ public class Crafting implements Listener {
 			if (event.getViewers().isEmpty() == false) {
 				Player p = (Player) event.getViewers().get(0);
 				
-				RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Crafting, p, item.getType(), /*item.getDurability(), */p.getLocation());
+				RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.CRAFTING, p, item.getType(), /*item.getDurability(), */p.getLocation());
 				
 				if (bannedInfo != null) {
 					event.getInventory().setResult(null);
@@ -35,7 +35,7 @@ public class Crafting implements Listener {
 					ir.getConfigHandler().printMessage(p, "chatMessages.craftingRestricted", bannedInfo.reason);
 				}
 			} else {
-	            RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Crafting, null, item.getType(), /*item.getDurability(), */null);
+	            RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.CRAFTING, null, item.getType(), /*item.getDurability(), */null);
 				
 				if (bannedInfo != null) {
 					event.getInventory().setResult(null);

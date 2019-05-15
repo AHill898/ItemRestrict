@@ -34,22 +34,22 @@ public class DisableRecipe {
 	public void disableRecipesTask(int delay) {
 		Bukkit.getScheduler().runTaskLaterAsynchronously(ir, new Runnable() {
 
-			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
 				if (ir.craftingDisabled.isEmpty() == false) {
 					for (String s : ir.craftingDisabled) {
 						String[] s1 = s.split(":");
 						try {
-							int id = Integer.parseInt(s1[0]);
-							Material m = Material.getMaterial(id);
-							ItemStack is = null;
-							if (s1[1].contains("*") == true) {
+							//int id = Integer.parseInt(s1[0]);
+							Material material = Material.valueOf(s1[0].toUpperCase());
+							//Material m = Material.getMaterial(id);
+							ItemStack is = new ItemStack(material);
+							/*if (s1[1].contains("*") == true) {
 								is = new ItemStack(m);
 							} else {
 								short b = Short.parseShort(s1[1]);
 								is = new ItemStack(m, 1, b);
-							}
+							}*/
 							
 							removeRecipe(is);
 						} catch (Exception e) {

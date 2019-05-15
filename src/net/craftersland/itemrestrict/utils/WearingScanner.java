@@ -29,7 +29,7 @@ public class WearingScanner {
 						final ItemStack helmet = p.getInventory().getHelmet();
 						
 						if (boots != null) {
-							RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Wearing, p, boots.getType(), /*boots.getData().getData(), */p.getLocation());
+							RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.WEARING, p, boots.getType(), /*boots.getData().getData(), */p.getLocation());
 							if (bannedInfo != null) {
 								ir.getConfigHandler().printMessage(p, "chatMessages.wearingRestricted", bannedInfo.reason);
 								Bukkit.getScheduler().runTask(ir, new Runnable() {
@@ -44,7 +44,7 @@ public class WearingScanner {
 							}
 						}
 						if (leggings != null) {
-							RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Wearing, p, leggings.getType(), /*leggings.getData().getData(), */p.getLocation());
+							RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.WEARING, p, leggings.getType(), /*leggings.getData().getData(), */p.getLocation());
 							if (bannedInfo != null) {
 								ir.getConfigHandler().printMessage(p, "chatMessages.wearingRestricted", bannedInfo.reason);
 								Bukkit.getScheduler().runTask(ir, new Runnable() {
@@ -59,7 +59,7 @@ public class WearingScanner {
 							}
 						}
 						if (chestplate != null) {
-							RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Wearing, p, chestplate.getType(), /*chestplate.getData().getData(), */p.getLocation());
+							RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.WEARING, p, chestplate.getType(), /*chestplate.getData().getData(), */p.getLocation());
 							if (bannedInfo != null) {
 								ir.getConfigHandler().printMessage(p, "chatMessages.wearingRestricted", bannedInfo.reason);
 								Bukkit.getScheduler().runTask(ir, new Runnable() {
@@ -74,7 +74,7 @@ public class WearingScanner {
 							}
 						}
 						if (helmet != null) {
-							RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Wearing, p, helmet.getType(), /*helmet.getData().getData(), */p.getLocation());
+							RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.WEARING, p, helmet.getType(), /*helmet.getData().getData(), */p.getLocation());
 							if (bannedInfo != null) {
 								ir.getConfigHandler().printMessage(p, "chatMessages.wearingRestricted", bannedInfo.reason);
 								Bukkit.getScheduler().runTask(ir, new Runnable() {

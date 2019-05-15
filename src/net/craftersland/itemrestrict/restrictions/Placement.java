@@ -20,7 +20,7 @@ public class Placement implements Listener {
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onInteract(BlockPlaceEvent event) {
 		if (ir.placementBanned.size() != 0) {	
-			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Placement, event.getPlayer(), event.getItemInHand().getType(), /*event.getItemInHand().getDurability(), */event.getPlayer().getLocation());
+			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.PLACEMENT, event.getPlayer(), event.getItemInHand().getType(), /*event.getItemInHand().getDurability(), */event.getPlayer().getLocation());
 			
 			if (bannedInfo != null) {
 				event.setCancelled(true);
@@ -30,7 +30,7 @@ public class Placement implements Listener {
 				ir.getSoundHandler().sendEndermanTeleportSound(event.getPlayer());
 				ir.getConfigHandler().printMessage(event.getPlayer(), "chatMessages.placementRestricted", bannedInfo.reason);
 			} else if (ir.is19Server == true) {
-				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Placement, event.getPlayer(), event.getPlayer().getInventory().getItemInOffHand().getType(), /*event.getPlayer().getInventory().getItemInOffHand().getDurability(), */event.getPlayer().getLocation());
+				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.PLACEMENT, event.getPlayer(), event.getPlayer().getInventory().getItemInOffHand().getType(), /*event.getPlayer().getInventory().getItemInOffHand().getDurability(), */event.getPlayer().getLocation());
 				if (bannedInfo2 != null) {
 					event.setCancelled(true);
 					ir.getSoundHandler().sendEndermanTeleportSound(event.getPlayer());

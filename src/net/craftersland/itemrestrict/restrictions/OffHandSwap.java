@@ -19,10 +19,10 @@ public class OffHandSwap implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	private void onOffHandSwap(PlayerSwapHandItemsEvent event) {
-		RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Ownership, event.getPlayer(), event.getOffHandItem().getType(), /*event.getOffHandItem().getDurability(), */event.getPlayer().getLocation());
+		RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, event.getPlayer(), event.getOffHandItem().getType(), /*event.getOffHandItem().getDurability(), */event.getPlayer().getLocation());
 		if (bannedInfo == null) {
-			RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.Usage, event.getPlayer(), event.getOffHandItem().getType(), /*event.getOffHandItem().getDurability(), */event.getPlayer().getLocation());
-			RestrictedItem bannedInfo3 = ir.getRestrictedItemsHandler().isBanned(ActionType.Placement, event.getPlayer(), event.getOffHandItem().getType(), /*event.getOffHandItem().getDurability(), */event.getPlayer().getLocation());
+			RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.USAGE, event.getPlayer(), event.getOffHandItem().getType(), /*event.getOffHandItem().getDurability(), */event.getPlayer().getLocation());
+			RestrictedItem bannedInfo3 = ir.getRestrictedItemsHandler().isBanned(ActionType.PLACEMENT, event.getPlayer(), event.getOffHandItem().getType(), /*event.getOffHandItem().getDurability(), */event.getPlayer().getLocation());
 			if (bannedInfo2 != null) {
 				event.setCancelled(true);
 				//event.setOffHandItem(null);

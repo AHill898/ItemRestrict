@@ -27,7 +27,7 @@ public class Smelting implements Listener {
 		if (f.getInventory().getViewers().isEmpty() == false) {
 			Player p = (Player) f.getInventory().getViewers().get(0);
 			
-			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Smelting, p, item.getType(), /*item.getDurability(), */p.getLocation());
+			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.SMELTING, p, item.getType(), /*item.getDurability(), */p.getLocation());
 			
 			if (bannedInfo != null) {
 				event.setCancelled(true);
@@ -36,7 +36,7 @@ public class Smelting implements Listener {
 				ir.getConfigHandler().printMessage(p, "chatMessages.smeltingRestricted", bannedInfo.reason);
 			}
 		} else {
-            RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.Smelting, null, item.getType(), /*item.getDurability(), */null);
+            RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.SMELTING, null, item.getType(), /*item.getDurability(), */null);
 			
 			if (bannedInfo != null) {
 				event.setCancelled(true);

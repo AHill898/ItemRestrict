@@ -1,6 +1,5 @@
 package net.craftersland.itemrestrict;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,8 +34,8 @@ public class ItemRestrict extends JavaPlugin {
 	public static Logger log;
 	public static String pluginName = "ItemRestrict";
 	
-	public static ArrayList<World> enforcementWorlds = new ArrayList<World>();
-	public static MaterialCollection ownershipBanned = new MaterialCollection();
+	public ArrayList<World> enforcementWorlds = new ArrayList<World>();
+	public MaterialCollection ownershipBanned = new MaterialCollection();
 	public MaterialCollection craftingBanned = new MaterialCollection();
 	public MaterialCollection smeltingBanned = new MaterialCollection();
 	public List<String> craftingDisabled = new ArrayList<String>();
@@ -72,7 +71,7 @@ public class ItemRestrict extends JavaPlugin {
 		wearingScanner.put(false, 0);
 		
 		//Create ItemRestrict plugin folder
-    	(new File("plugins"+System.getProperty("file.separator")+"ItemRestrict")).mkdir();
+		getDataFolder().mkdir();
     	
     	//Load Configuration
         configHandler = new ConfigHandler(this);

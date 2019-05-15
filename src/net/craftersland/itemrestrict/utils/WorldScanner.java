@@ -31,10 +31,10 @@ public class WorldScanner {
 				ItemRestrict.log.info("WorldScanner Task Started...");
 				ArrayList<World> worlds;
 				if(ir.worldBanned.size() > 0) {
-					if (ItemRestrict.enforcementWorlds.size() == 0) {
+					if (ir.enforcementWorlds.size() == 0) {
 						worlds = (ArrayList<World>) Bukkit.getServer().getWorlds();
 					} else {
-						worlds = ItemRestrict.enforcementWorlds;
+						worlds = ir.enforcementWorlds;
 					}
 					
 					for(int i = 0; i < worlds.size(); i++) {
@@ -78,7 +78,7 @@ public class WorldScanner {
 	
 	private void removeBlock(final Block block) {
 		RestrictedItem materialInfo = new RestrictedItem(block.getType(), /*block.getData(), */null, null);
-		RestrictedItem bannedInfo = ir.worldBanned.Contains(materialInfo);
+		RestrictedItem bannedInfo = ir.worldBanned.contains(materialInfo);
 		boolean removeSkull = false;
 		if (bannedInfo == null) {
 			if (ir.getConfigHandler().getBoolean("General.RemoveSkulls") == true) {
