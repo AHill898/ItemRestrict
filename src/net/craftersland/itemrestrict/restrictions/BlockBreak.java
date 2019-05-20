@@ -12,11 +12,7 @@ import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class BlockBreak implements Listener {
 	
-	private ItemRestrict ir;
-	
-	public BlockBreak(ItemRestrict ir) {
-		this.ir = ir;
-	}
+	private ItemRestrict ir = ItemRestrict.get();
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onBlockBreak(BlockBreakEvent event) {

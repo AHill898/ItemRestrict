@@ -16,11 +16,7 @@ import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class Creative implements Listener {
 	
-	private ItemRestrict ir;
-	
-	public Creative(ItemRestrict ir) {
-		this.ir = ir;
-	}
+	private ItemRestrict ir = ItemRestrict.get();
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onCreativeEvents(InventoryCreativeEvent event) {

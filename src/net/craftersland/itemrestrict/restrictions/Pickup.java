@@ -16,11 +16,7 @@ import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class Pickup implements Listener {
 	
-	private ItemRestrict ir;
-	
-	public Pickup(ItemRestrict ir) {
-		this.ir = ir;
-	}
+	private ItemRestrict ir = ItemRestrict.get();
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onItemPickup(PlayerPickupItemEvent event) {

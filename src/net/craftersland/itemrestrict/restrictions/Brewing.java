@@ -14,11 +14,7 @@ import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class Brewing implements Listener {
 	
-	private ItemRestrict ir;
-	
-	public Brewing(ItemRestrict ir) {
-		this.ir = ir;
-	}
+	private ItemRestrict ir = ItemRestrict.get();
 	
 	//-------------------------------------------------------------------
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)

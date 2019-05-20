@@ -11,11 +11,7 @@ import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class OffHandSwap implements Listener {
 	
-	private ItemRestrict ir;
-	
-	public OffHandSwap(ItemRestrict ir) {
-		this.ir = ir;
-	}
+	private ItemRestrict ir = ItemRestrict.get();
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	private void onOffHandSwap(PlayerSwapHandItemsEvent event) {

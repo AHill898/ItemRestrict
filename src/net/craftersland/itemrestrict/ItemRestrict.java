@@ -64,7 +64,11 @@ public class ItemRestrict extends JavaPlugin {
 	private static DisableRecipe ds;
 	private static SoundHandler sH;
 	
+	private static ItemRestrict instance;
+	
 	public void onEnable() {
+		instance = this;
+		
 		log = getLogger();
 		checkServerVersion();
 		worldScanner.put(false, 0);
@@ -74,14 +78,14 @@ public class ItemRestrict extends JavaPlugin {
 		getDataFolder().mkdir();
     	
     	//Load Configuration
-        configHandler = new ConfigHandler(this);
+        configHandler = new ConfigHandler();
         //Load Restricted Items
-        restrictedHandler = new RestrictedItemsHandler(this);
+        restrictedHandler = new RestrictedItemsHandler();
         //Load Classes
-        ws = new WorldScanner(this);
-        es = new WearingScanner(this);
+        ws = new WorldScanner();
+        es = new WearingScanner();
         if (is112Server == false) {
-        	ds = new DisableRecipe(this);
+        	ds = new DisableRecipe();
         } else {
         	log.warning("Removing recipes from the game is not possible in 1.12 due to a spigot bug: https://goo.gl/4v71Zv .Use CraftingBanned feature until this is fixed!");
         }
@@ -89,21 +93,19 @@ public class ItemRestrict extends JavaPlugin {
         
         //Register Listeners
     	PluginManager pm = getServer().getPluginManager();
-    	pm.registerEvents(new Ownership(this), this);
-    	pm.registerEvents(new Crafting(this), this);
-    	pm.registerEvents(new Smelting(this), this);
-    	pm.registerEvents(new Brewing(this), this);
-    	pm.registerEvents(new Creative(this), this);
-    	pm.registerEvents(new Usage(this), this);
-    	pm.registerEvents(new Placement(this), this);
-    	pm.registerEvents(new BlockBreak(this), this);
-    	pm.registerEvents(new Pickup(this), this);
-    	pm.registerEvents(new Drop(this), this);
-    	if (is19Server == true) {
-    		pm.registerEvents(new OffHandSwap(this), this);
-    	}
+    	pm.registerEvents(new Ownership(), instance);
+    	pm.registerEvents(new Crafting(), instance);
+    	pm.registerEvents(new Smelting(), instance);
+    	pm.registerEvents(new Brewing(), instance);
+    	pm.registerEvents(new Creative(), instance);
+    	pm.registerEvents(new Usage(), instance);
+    	pm.registerEvents(new Placement(), instance);
+    	pm.registerEvents(new BlockBreak(), instance);
+    	pm.registerEvents(new Pickup(), instance);
+    	pm.registerEvents(new Drop(), instance);
+    	if (is19Server == true) pm.registerEvents(new OffHandSwap(), instance);
     	
-    	getCommand("itemrestrict").setExecutor(new ItemRestrictCommand(this));
+    	getCommand("itemrestrict").setExecutor(new ItemRestrictCommand());
     	
     	printConsoleStatus();
     	
@@ -137,9 +139,9 @@ public class ItemRestrict extends JavaPlugin {
 		worldBanned.clear();
 		
 		//Load Configuration
-        configHandler = new ConfigHandler(this);
+        configHandler = new ConfigHandler();
         //Load Restricted Items
-        restrictedHandler = new RestrictedItemsHandler(this);
+        restrictedHandler = new RestrictedItemsHandler();
         
         //Restore recipes
         if (is112Server == false) {
@@ -173,9 +175,10 @@ public class ItemRestrict extends JavaPlugin {
 	}
 	
 	public void onDisable() {
-		Bukkit.getScheduler().cancelTasks(this);
-		HandlerList.unregisterAll(this);
+		Bukkit.getScheduler().cancelTasks(instance);
+		HandlerList.unregisterAll(instance);
 		log.info(pluginName + " is disabled!");
+		instance = null;
 	}
 	
 	private void printConsoleStatus() {
@@ -242,6 +245,10 @@ public class ItemRestrict extends JavaPlugin {
 	}
 	public SoundHandler getSoundHandler() {
 		return sH;
+	}
+	
+	public static ItemRestrict get() {
+		return instance;
 	}
 
 }

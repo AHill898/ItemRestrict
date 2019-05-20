@@ -22,11 +22,7 @@ import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class Ownership implements Listener {
 	
-	private ItemRestrict ir;
-	
-	public Ownership(ItemRestrict ir) {
-		this.ir = ir;
-	}
+	private ItemRestrict ir = ItemRestrict.get();
 	
 	//Inventory Click
 	@EventHandler(priority = EventPriority.LOWEST)

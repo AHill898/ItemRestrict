@@ -11,10 +11,9 @@ import org.bukkit.entity.Player;
 
 public class ConfigHandler {
 	
-	private ItemRestrict ir;
+	private ItemRestrict ir = ItemRestrict.get();
 	
-	public ConfigHandler(final ItemRestrict ir) {
-		this.ir = ir;
+	public ConfigHandler() {
 		loadConfig();
 	}
 	

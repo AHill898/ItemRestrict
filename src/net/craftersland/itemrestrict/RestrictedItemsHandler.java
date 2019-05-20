@@ -14,20 +14,19 @@ import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class RestrictedItemsHandler {
 	
-	private ItemRestrict itemRestrict;
+	private ItemRestrict ir = ItemRestrict.get();
 	private File restrictedItemsFile;
 	
-	public RestrictedItemsHandler(ItemRestrict itemRestrict) {
-		this.itemRestrict = itemRestrict;
+	public RestrictedItemsHandler() {
 		
 		try {
-			restrictedItemsFile = new File(itemRestrict.getDataFolder() + "RestrictedItems.yml");
+			restrictedItemsFile = new File(ir.getDataFolder() + "RestrictedItems.yml");
 			
 			//Create RestrictedItems.yml and/or load it
 			if (!restrictedItemsFile.exists()) {
 				ItemRestrict.log.info("No RestrictedItems.yml file found! Creating new one...");
 				
-				itemRestrict.saveResource("RestrictedItems.yml", false);
+				ir.saveResource("RestrictedItems.yml", false);
 			}
 			
 			FileConfiguration ymlFormat = YamlConfiguration.loadConfiguration(restrictedItemsFile);
@@ -37,21 +36,21 @@ public class RestrictedItemsHandler {
 			//
 			List<String> OwnershipBanned = ymlFormat.getStringList("OwnershipBanned");
 			//parse the strings from the config file
-			parseMaterialListFromConfig(OwnershipBanned, itemRestrict.ownershipBanned, "OwnershipBanned");
+			parseMaterialListFromConfig(OwnershipBanned, ir.ownershipBanned, "OwnershipBanned");
 			
 			//
 			//CRAFTING BANS 
 			//
 			List<String> CraftingBanned = ymlFormat.getStringList("CraftingBanned");
 			//parse the strings from the config file
-			parseMaterialListFromConfig(CraftingBanned, itemRestrict.craftingBanned, "CraftingBanned");
+			parseMaterialListFromConfig(CraftingBanned, ir.craftingBanned, "CraftingBanned");
 			
 			//
 			//CRAFTING BANS 
 			//
 			List<String> SmeltingBanned = ymlFormat.getStringList("SmeltingBanned");
 			//parse the strings from the config file
-			parseMaterialListFromConfig(SmeltingBanned, itemRestrict.smeltingBanned, "SmeltingBanned");
+			parseMaterialListFromConfig(SmeltingBanned, ir.smeltingBanned, "SmeltingBanned");
 			
 			//
 			//CRAFTING DISABLED
@@ -59,7 +58,7 @@ public class RestrictedItemsHandler {
 			List<String> CraftingDisabled = ymlFormat.getStringList("CraftingDisabled");
 			//parse the strings from the config file
 			for (String s : CraftingDisabled) {
-				itemRestrict.craftingDisabled.add(s);
+				ir.craftingDisabled.add(s);
 			}
 			
 			//
@@ -67,36 +66,36 @@ public class RestrictedItemsHandler {
 			//
 			List<String> BrewingBanned = ymlFormat.getStringList("BrewingBanned");
 			//parse the strings from the config file
-			parseMaterialListFromConfig(BrewingBanned, itemRestrict.brewingBanned, "BrewingBanned");
+			parseMaterialListFromConfig(BrewingBanned, ir.brewingBanned, "BrewingBanned");
 			
 			//
 			//WEARING BANS 
 			//
 			List<String> WearingBanned = ymlFormat.getStringList("WearingBanned");
 			//parse the strings from the config file
-			parseMaterialListFromConfig(WearingBanned, itemRestrict.wearingBanned, "WearingBanned");
+			parseMaterialListFromConfig(WearingBanned, ir.wearingBanned, "WearingBanned");
 			
 			//
 			//USAGE BANS 
 			//
 			List<String> UsageBanned = ymlFormat.getStringList("UsageBanned");
 			//parse the strings from the config file
-			parseMaterialListFromConfig(UsageBanned, itemRestrict.usageBanned, "UsageBanned");
+			parseMaterialListFromConfig(UsageBanned, ir.usageBanned, "UsageBanned");
 			
 			//
 			//PLACEMENT BANS 
 			//
 			List<String> PlacementBanned = ymlFormat.getStringList("PlacementBanned");
 			//parse the strings from the config file
-			parseMaterialListFromConfig(PlacementBanned, itemRestrict.placementBanned, "PlacementBanned");
+			parseMaterialListFromConfig(PlacementBanned, ir.placementBanned, "PlacementBanned");
 			
 			//
 			//BLOCK BREAK BANS 
 			//
-			if (itemRestrict.getConfigHandler().getBoolean("General.Restrictions.BreakBans") == true) {
+			if (ir.getConfigHandler().getBoolean("General.Restrictions.BreakBans") == true) {
 				List<String> BlockBreakBanned = ymlFormat.getStringList("BlockBreakBanned");
 				//parse the strings from the config file
-				parseMaterialListFromConfig(BlockBreakBanned, itemRestrict.blockBreakBanned, "BlockBreakBanned");
+				parseMaterialListFromConfig(BlockBreakBanned, ir.blockBreakBanned, "BlockBreakBanned");
 			}
 			
 			//
@@ -104,21 +103,21 @@ public class RestrictedItemsHandler {
 			//
 			List<String> CreativeBanned = ymlFormat.getStringList("CreativeBanned");
 			//parse the strings from the config file
-			parseMaterialListFromConfig(CreativeBanned, itemRestrict.creativeBanned, "CreativeBanned");
+			parseMaterialListFromConfig(CreativeBanned, ir.creativeBanned, "CreativeBanned");
 			
 			//
 			//PICKUP BANS 
 			//
 			List<String> PickupBanned = ymlFormat.getStringList("PickupBanned");
 			//parse the strings from the config file
-			parseMaterialListFromConfig(PickupBanned, itemRestrict.pickupBanned, "PickupBanned");
+			parseMaterialListFromConfig(PickupBanned, ir.pickupBanned, "PickupBanned");
 			
 			//
 			//DROP BANS 
 			//
 			List<String> DropBanned = ymlFormat.getStringList("DropBanned");
 			//parse the strings from the config file
-			parseMaterialListFromConfig(DropBanned, itemRestrict.dropBanned, "DropBanned");
+			parseMaterialListFromConfig(DropBanned, ir.dropBanned, "DropBanned");
 			
 			//
 			//SMELTING BANS 
@@ -126,7 +125,7 @@ public class RestrictedItemsHandler {
 			List<String> SmeltingDisabled = ymlFormat.getStringList("SmeltingDisabled");
 			//parse the strings from the config file
 			for (String s : SmeltingDisabled) {
-				itemRestrict.smeltingDisabled.add(s);
+				ir.smeltingDisabled.add(s);
 			}
 			
 			//
@@ -134,7 +133,7 @@ public class RestrictedItemsHandler {
 			//
 			List<String> WorldBanned = ymlFormat.getStringList("WorldBanned");
 			//parse the strings from the config file
-			parseMaterialListFromConfig(WorldBanned, itemRestrict.worldBanned, "WorldBanned");
+			parseMaterialListFromConfig(WorldBanned, ir.worldBanned, "WorldBanned");
 			
 		} catch (Exception e) {
 			ItemRestrict.log.severe("Could not create RestrictedItems.yml file! Error: " + e.getMessage());
@@ -164,46 +163,46 @@ public class RestrictedItemsHandler {
 	}
 	
 	public RestrictedItem isBanned(ActionType actionType, Player player, Material material, /*short data, */Location location) {
-		if (itemRestrict.getConfigHandler().getString("General.EnableOnAllWorlds") != "true") {
+		if (ir.getConfigHandler().getString("General.EnableOnAllWorlds") != "true") {
 			if (location != null) {
-				if(!itemRestrict.enforcementWorlds.contains(location.getWorld())) return null;
+				if(!ir.enforcementWorlds.contains(location.getWorld())) return null;
 			}
 		}
 		if (player != null && player.hasPermission("itemrestrict.admin") || player != null && player.hasPermission("itemrestrict.bypass")) return null;
 		MaterialCollection collectionToSearch;
 		String permissionNode;
 		if(actionType == ActionType.USAGE) {
-			collectionToSearch = itemRestrict.usageBanned;
+			collectionToSearch = ir.usageBanned;
 			permissionNode = "use";
 		} else if(actionType == ActionType.PLACEMENT)	{
-			collectionToSearch = itemRestrict.placementBanned;
+			collectionToSearch = ir.placementBanned;
 			permissionNode = "place";
 		} else if(actionType == ActionType.BLOCKBREAK)	{
-			collectionToSearch = itemRestrict.blockBreakBanned;
+			collectionToSearch = ir.blockBreakBanned;
 			permissionNode = "break";
 		} else if(actionType == ActionType.CRAFTING) {
-			collectionToSearch = itemRestrict.craftingBanned;
+			collectionToSearch = ir.craftingBanned;
 			permissionNode = "craft";
 		} else if(actionType == ActionType.BREWING) {
-			collectionToSearch = itemRestrict.brewingBanned;
+			collectionToSearch = ir.brewingBanned;
 			permissionNode = "brew";
 		} else if(actionType == ActionType.WEARING) {
-			collectionToSearch = itemRestrict.wearingBanned;
+			collectionToSearch = ir.wearingBanned;
 			permissionNode = "wear";
 		} else if(actionType == ActionType.CREATIVE) {
-			collectionToSearch = itemRestrict.creativeBanned;
+			collectionToSearch = ir.creativeBanned;
 			permissionNode = "creative";
 		} else if(actionType == ActionType.PICKUP) {
-			collectionToSearch = itemRestrict.pickupBanned;
+			collectionToSearch = ir.pickupBanned;
 			permissionNode = "pickup";
 		} else if(actionType == ActionType.DROP) {
-			collectionToSearch = itemRestrict.dropBanned;
+			collectionToSearch = ir.dropBanned;
 			permissionNode = "drop";
 		} else if(actionType == ActionType.SMELTING) {
-			collectionToSearch = itemRestrict.smeltingBanned;
+			collectionToSearch = ir.smeltingBanned;
 			permissionNode = "smelt";
 		} else {
-			collectionToSearch = itemRestrict.ownershipBanned;
+			collectionToSearch = ir.ownershipBanned;
 			permissionNode = "own";
 		}
 		

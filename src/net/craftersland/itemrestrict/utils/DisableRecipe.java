@@ -11,11 +11,9 @@ import net.craftersland.itemrestrict.ItemRestrict;
 
 public class DisableRecipe {
 	
-	private ItemRestrict ir;
+	private ItemRestrict ir = ItemRestrict.get();
 	
-	public DisableRecipe(ItemRestrict ir) {
-		this.ir = ir;
-		
+	public DisableRecipe() {
 		disableRecipesTask(5);
 	}
 	

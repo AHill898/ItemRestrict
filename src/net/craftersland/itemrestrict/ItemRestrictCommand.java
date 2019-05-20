@@ -8,11 +8,7 @@ import org.bukkit.entity.Player;
 
 public class ItemRestrictCommand implements CommandExecutor {
 	
-    private ItemRestrict itemrestrict;
-	
-	public ItemRestrictCommand(ItemRestrict itemrestrict) {
-		this.itemrestrict = itemrestrict;
-	}
+    private ItemRestrict itemrestrict = ItemRestrict.get();
 	
 	//Commands
 	@Override

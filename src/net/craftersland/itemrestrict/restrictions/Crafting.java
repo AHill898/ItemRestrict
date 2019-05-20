@@ -13,11 +13,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class Crafting implements Listener {
 	
-	private ItemRestrict ir;
-	
-	public Crafting(ItemRestrict ir) {
-		this.ir = ir;
-	}
+	private ItemRestrict ir = ItemRestrict.get();
 	
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	private void onItemCrafted(PrepareItemCraftEvent event) {

@@ -21,15 +21,11 @@ import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class Usage implements Listener {
 	
-	private ItemRestrict ir;
+	private ItemRestrict ir = ItemRestrict.get();
 	private Set<String> safety = new HashSet<String>();
 	
-	public Usage(ItemRestrict ir) {
-		this.ir = ir;
-	}
-	
 	private boolean isEventSafe(final String pN) {
-		if (safety.contains(pN) == true) {
+		if (safety.contains(pN)) {
 			return false;
 		}
 		safety.add(pN);
@@ -53,7 +49,7 @@ public class Usage implements Listener {
 		if (ir.is19Server == false) {
 			item = player.getItemInHand();
 		} else {
-			if (isEventSafe(event.getPlayer().getName()) == false) return;
+			if (!isEventSafe(event.getPlayer().getName())) return;
 			item = player.getInventory().getItemInMainHand();
 			item2 = player.getInventory().getItemInOffHand();
 		}

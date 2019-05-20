@@ -15,11 +15,7 @@ import org.bukkit.scheduler.BukkitTask;
 public class WorldScanner {
 	
 	private int nextChunkPercentile = 0;
-	private ItemRestrict ir;
-	
-	public WorldScanner(ItemRestrict ir) {
-		this.ir = ir;
-	}
+	private ItemRestrict ir = ItemRestrict.get();
 	
 	public void worldScanTask() {
 		//start the repeating scan for banned items in loaded chunks

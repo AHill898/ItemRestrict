@@ -11,11 +11,7 @@ import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class Placement implements Listener {
 	
-	private ItemRestrict ir;
-	
-	public Placement(ItemRestrict ir) {
-		this.ir = ir;
-	}
+	private ItemRestrict ir = ItemRestrict.get();
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onInteract(BlockPlaceEvent event) {

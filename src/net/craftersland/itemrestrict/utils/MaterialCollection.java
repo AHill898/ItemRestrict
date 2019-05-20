@@ -15,10 +15,10 @@ public class MaterialCollection {
 	}
 	
 	//returns a MaterialInfo complete with the friendly material name from the config file
-	public RestrictedItem contains(RestrictedItem material) {
+	public RestrictedItem contains(RestrictedItem restrictedItem) {
 		for(int i = 0; i < this.materials.size(); i++) {
 			RestrictedItem thisMaterial = this.materials.get(i);
-			if(material.material == thisMaterial.material/* && (thisMaterial.allDataValues || material.data == thisMaterial.data)*/) {
+			if(restrictedItem.material == thisMaterial.material/* && (thisMaterial.allDataValues || material.data == thisMaterial.data)*/) {
 				return thisMaterial;
 			}
 			/*else if(thisMaterial.material > material.material)

@@ -13,11 +13,7 @@ import net.craftersland.itemrestrict.utils.RestrictedItem;
 
 public class Drop implements Listener {
 	
-	private ItemRestrict ir;
-	
-	public Drop(ItemRestrict ir) {
-		this.ir = ir;
-	}
+	private ItemRestrict ir = ItemRestrict.get();
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onItemDrop(PlayerDropItemEvent event) {
