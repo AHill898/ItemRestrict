@@ -28,18 +28,18 @@ public class Creative implements Listener {
 			ItemStack cursorItem = event.getCursor();
 			
 			if (cursorItem != null) {
-				Player p = (Player) event.getWhoClicked();
-				RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, p, cursorItem.getType(), /*cursoritem.getDurability(), */p.getLocation());
+				Player player = (Player) event.getWhoClicked();
+				RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, player, cursorItem.getType(), /*cursoritem.getDurability(), */player.getLocation());
 				
 				if (bannedInfo == null) {
-					RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.CREATIVE, p, cursorItem.getType(), /*cursoritem.getDurability(), */p.getLocation());
+					RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.CREATIVE, player, cursorItem.getType(), /*cursoritem.getDurability(), */player.getLocation());
 					
 					if (bannedInfo2 != null) {
 						event.setCancelled(true);
 						event.setCursor(null);
 						
-						ir.getSoundHandler().sendItemBreakSound(p);
-						ir.getConfigHandler().printMessage(p, "chatMessages.creativeRestricted", bannedInfo2.reason);
+						ir.getSoundHandler().sendItemBreakSound(player);
+						ir.getConfigHandler().printMessage(player, "chatMessages.creativeRestricted", bannedInfo2.reason);
 					}
 				}
 			}
@@ -76,21 +76,21 @@ public class Creative implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onInteract(PlayerInteractEvent event) {
-		Player p = event.getPlayer();
+		Player player = event.getPlayer();
 		
-		if (p.getGameMode() == GameMode.CREATIVE) {
-			ItemStack item = p.getItemInHand();
+		if (player.getGameMode() == GameMode.CREATIVE) {
+			ItemStack item = player.getItemInHand();
 			
-			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, p, item.getType(), /*item.getDurability(), */p.getLocation());
+			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, player, item.getType(), /*item.getDurability(), */player.getLocation());
 			
 			if (bannedInfo == null) {
-				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.CREATIVE, p, item.getType(), /*item.getDurability(), */p.getLocation());
+				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.CREATIVE, player, item.getType(), /*item.getDurability(), */player.getLocation());
 				
 				if (bannedInfo2 != null) {
 					event.setCancelled(true);
 					
-					ir.getSoundHandler().sendItemBreakSound(p);
-					ir.getConfigHandler().printMessage(p, "chatMessages.creativeRestricted", bannedInfo2.reason);
+					ir.getSoundHandler().sendItemBreakSound(player);
+					ir.getConfigHandler().printMessage(player, "chatMessages.creativeRestricted", bannedInfo2.reason);
 				}
 			}
 		}

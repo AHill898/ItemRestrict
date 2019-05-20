@@ -22,19 +22,19 @@ public class Drop implements Listener {
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onItemDrop(PlayerDropItemEvent event) {
 		if (ir.getConfigHandler().getBoolean("General.Restrictions.DropBans") == true) {
-			Player p = event.getPlayer();
+			Player player = event.getPlayer();
 			ItemStack item = event.getItemDrop().getItemStack();
 			
-			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, p, item.getType(), /*item.getDurability(), */p.getLocation());
+			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, player, item.getType(), /*item.getDurability(), */player.getLocation());
 			
 			if (bannedInfo == null) {
-				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.DROP, p, item.getType(), /*item.getDurability(), */p.getLocation());
+				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.DROP, player, item.getType(), /*item.getDurability(), */player.getLocation());
 				
 				if (bannedInfo2 != null) {
 					event.setCancelled(true);
 					
-					ir.getSoundHandler().sendPlingSound(p);
-					ir.getConfigHandler().printMessage(p, "chatMessages.dropingRestricted", bannedInfo2.reason);
+					ir.getSoundHandler().sendPlingSound(player);
+					ir.getConfigHandler().printMessage(player, "chatMessages.dropingRestricted", bannedInfo2.reason);
 				}
 			}
 		}

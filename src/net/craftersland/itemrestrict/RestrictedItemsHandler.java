@@ -169,7 +169,7 @@ public class RestrictedItemsHandler {
 				if(!itemRestrict.enforcementWorlds.contains(location.getWorld())) return null;
 			}
 		}
-		if (player != null && player.hasPermission("ItemRestrict.admin") || player != null && player.hasPermission("ItemRestrict.bypass")) return null;
+		if (player != null && player.hasPermission("itemrestrict.admin") || player != null && player.hasPermission("itemrestrict.bypass")) return null;
 		MaterialCollection collectionToSearch;
 		String permissionNode;
 		if(actionType == ActionType.USAGE) {
@@ -210,8 +210,8 @@ public class RestrictedItemsHandler {
 		RestrictedItem bannedInfo = collectionToSearch.contains(new RestrictedItem(material, /*data, */null, null));
 		if(bannedInfo != null) {
 			if (player == null) return bannedInfo;
-			if(player.hasPermission("ItemRestrict.bypass." + material + ".*.*")) return null;
-			if(player.hasPermission("ItemRestrict.bypass." + material + ".*." + permissionNode)) return null;
+			if(player.hasPermission("itemrestrict.bypass." + material + ".*.*")) return null;
+			if(player.hasPermission("itemrestrict.bypass." + material + ".*." + permissionNode)) return null;
 			//if(player.hasPermission("ItemRestrict.bypass." + material + "." + data + "." + permissionNode)) return null;			
 			//if(player.hasPermission("ItemRestrict.bypass." + material + "." + data + ".*")) return null;
 			

@@ -102,8 +102,8 @@ public class ItemRestrict extends JavaPlugin {
     	if (is19Server == true) {
     		pm.registerEvents(new OffHandSwap(this), this);
     	}
-    	CommandHandler cH = new CommandHandler(this);
-    	getCommand("itemrestrict").setExecutor(cH);
+    	
+    	getCommand("itemrestrict").setExecutor(new ItemRestrictCommand(this));
     	
     	printConsoleStatus();
     	

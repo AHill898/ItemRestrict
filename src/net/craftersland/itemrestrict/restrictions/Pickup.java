@@ -25,13 +25,13 @@ public class Pickup implements Listener {
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onItemPickup(PlayerPickupItemEvent event) {
 		if (ir.getConfigHandler().getBoolean("General.Restrictions.PickupBans") == true) {
-			Player p = event.getPlayer();
+			Player player = event.getPlayer();
 			ItemStack item = event.getItem().getItemStack();
 			
-			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, p, item.getType(), /*item.getDurability(), */p.getLocation());
+			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, player, item.getType(), /*item.getDurability(), */player.getLocation());
 			
 			if (bannedInfo == null) {
-				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.PICKUP, p, item.getType(), /*item.getDurability(), */p.getLocation());
+				RestrictedItem bannedInfo2 = ir.getRestrictedItemsHandler().isBanned(ActionType.PICKUP, player, item.getType(), /*item.getDurability(), */player.getLocation());
 				
 				if (bannedInfo2 != null) {
 					event.setCancelled(true);
@@ -39,8 +39,8 @@ public class Pickup implements Listener {
 					Location loc = event.getItem().getLocation();
 					event.getItem().teleport(new Location(loc.getWorld(), loc.getX() + getRandomInt(), loc.getY() + getRandomInt(), loc.getZ() + getRandomInt()));
 					
-					ir.getSoundHandler().sendPlingSound(p);
-					ir.getConfigHandler().printMessage(p, "chatMessages.pickupRestricted", bannedInfo2.reason);
+					ir.getSoundHandler().sendPlingSound(player);
+					ir.getConfigHandler().printMessage(player, "chatMessages.pickupRestricted", bannedInfo2.reason);
 				}
 			}
 		}

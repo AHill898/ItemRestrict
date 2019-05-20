@@ -6,77 +6,76 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandHandler implements CommandExecutor {
+public class ItemRestrictCommand implements CommandExecutor {
 	
     private ItemRestrict itemrestrict;
 	
-	public CommandHandler(ItemRestrict itemrestrict) {
+	public ItemRestrictCommand(ItemRestrict itemrestrict) {
 		this.itemrestrict = itemrestrict;
 	}
 	
 	//Commands
 	@Override
 	public boolean onCommand(final CommandSender sender, final Command command, final String cmdlabel, final String[] args) {
-		final Player p;
+		final Player player;
 		//Main command: /itemrestrict
-		if (cmdlabel.equalsIgnoreCase("itemrestrict")) {
-			if (args.length == 0) {
+		if (args.length == 0) {
+			if (sender instanceof Player) {
+				player = (Player) sender;
+				sendHelp(player);
+				return true;
+			} else {
+				sendConsoleHelp(sender);
+				return false;
+			}
+		}
+		if (args.length == 1) {
+			//command: /itemrestrict reload
+			if (args[0].equalsIgnoreCase("reload")) {
 				if (sender instanceof Player) {
-					p = (Player) sender;
-					sendHelp(p);
+					player = (Player) sender;
+					if (player.hasPermission("itemrestrict.admin")) {
+						
+						itemrestrict.onReload();
+							
+						itemrestrict.getConfigHandler().printMessage(player, "chatMessages.reload", "");
+						itemrestrict.getSoundHandler().sendLevelUpSound(player);
+							
+						return true;
+					} else {
+						itemrestrict.getConfigHandler().printMessage(player, "chatMessages.noPermission", "");
+						
+						itemrestrict.getSoundHandler().sendPlingSound(player);
+						return false;
+					}
+				} else {
+					itemrestrict.onReload();
+					return true;
+				}
+			}
+			//command: /itemrestrict help
+			if (args[0].equalsIgnoreCase("help")) {
+				if (sender instanceof Player) {
+					player = (Player) sender;
+					sendHelp(player);
 					return true;
 				} else {
 					sendConsoleHelp(sender);
 					return false;
 				}
 			}
-			if (args.length == 1) {
-				//command: /itemrestrict reload
-				if (args[0].equalsIgnoreCase("reload")) {
-					if (sender instanceof Player) {
-						p = (Player) sender;
-						if (p.hasPermission("ItemRestrict.admin")) {
-							
-							itemrestrict.onReload();
-							
-							itemrestrict.getConfigHandler().printMessage(p, "chatMessages.reload", "");
-							itemrestrict.getSoundHandler().sendLevelUpSound(p);
-							
-							return true;
-						} else {
-							itemrestrict.getConfigHandler().printMessage(p, "chatMessages.noPermission", "");
-							
-							itemrestrict.getSoundHandler().sendPlingSound(p);
-							return false;
-						}
-					} else {
-						itemrestrict.onReload();
-						return true;
-					}
-				}
-				//command: /itemrestrict help
-				if (args[0].equalsIgnoreCase("help")) {
-					if (sender instanceof Player) {
-						p = (Player) sender;
-						sendHelp(p);
-						return true;
-					} else {
-						sendConsoleHelp(sender);
-						return false;
-					}
-				}
-			}
-			
-			if (args.length > 1 || !args[0].equalsIgnoreCase("help") && !args[0].equalsIgnoreCase("reload")) {
-				if (sender instanceof Player) {
-					p = (Player) sender;
-					itemrestrict.getConfigHandler().printMessage(p, "chatMessages.unknownCommand", "");
-					itemrestrict.getSoundHandler().sendPlingSound(p);
-				} else {
-					sender.sendMessage(ChatColor.RED + "Unknown command for help do /itemrestrict");
-				}
+		}
+		
+		if (args.length > 1 || !args[0].equalsIgnoreCase("help") && !args[0].equalsIgnoreCase("reload")) {
+			if (sender instanceof Player) {
+				player = (Player) sender;
+				itemrestrict.getConfigHandler().printMessage(player, "chatMessages.unknownCommand", "");
+				itemrestrict.getSoundHandler().sendPlingSound(player);
+			} else {
+				sender.sendMessage(ChatColor.RED + "Unknown command for help do /itemrestrict");
 			}
 		}
+		
 		return false;
 	}
 	
@@ -88,7 +87,7 @@ public class CommandHandler implements CommandExecutor {
 		
 		p.sendMessage(" ");
 		p.sendMessage(ChatColor.DARK_RED + "-=-=-=-=-=-=-=-=-=-< " + ChatColor.RED + "" + ChatColor.BOLD + "ItemRestrict" + ChatColor.DARK_RED + " >-=-=-=-=-=-=-=-=-=-");
-		if (p.hasPermission("ItemRestrict.admin")) {
+		if (p.hasPermission("itemrestrict.admin")) {
 			p.sendMessage(" ");
 			p.sendMessage(ChatColor.RED + "        Reload plugin config and RestrictedItems list:");
 			p.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + ">> " + ChatColor.WHITE + "/itemrestrict reload");
