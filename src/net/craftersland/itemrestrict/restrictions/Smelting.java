@@ -20,7 +20,7 @@ public class Smelting implements Listener {
 	private void onItemCrafted(FurnaceSmeltEvent event) {
 		ItemStack item = event.getSource();
 		Furnace furnace = (Furnace) event.getBlock().getState();
-		if (furnace.getInventory().getViewers().isEmpty() == false) {
+		if (!furnace.getInventory().getViewers().isEmpty()) {
 			Player player = (Player) furnace.getInventory().getViewers().get(0);
 			
 			RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.SMELTING, player, item.getType(), /*item.getDurability(), */player.getLocation());

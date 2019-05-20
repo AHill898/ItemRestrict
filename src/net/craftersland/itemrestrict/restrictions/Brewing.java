@@ -20,8 +20,8 @@ public class Brewing implements Listener {
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	public void onBrewingPotions(BrewEvent event) {
 		//Check if brewing bans are enabled or not
-		if (ir.getConfigHandler().getBoolean("General.Restrictions.EnableBrewingBans") == true) {
-			if (ir.is19Server == false) {
+		if (ir.getConfigHandler().getBoolean("General.Restrictions.EnableBrewingBans")) {
+			if (!ir.is19Server) {
 				oldFunction(event);
 			} else {
 				//TODO 1.9 potions
@@ -162,14 +162,13 @@ public class Brewing implements Listener {
 		//Check the brewed potions for banned potions. Delayed task to check the potions after brewing.
 		Bukkit.getScheduler().scheduleSyncDelayedTask(ir, new Runnable() {
 			
-			@SuppressWarnings("deprecation")
 			public void run() {
 				Player player = null;
 				boolean restricted = false;
 				boolean ingConsumed = false;
 				String reason = "";
 				//Check if there is a viewer on brewing stand
-				if (event.getContents().getViewers().isEmpty() == false) {
+				if (!event.getContents().getViewers().isEmpty()) {
 					player = (Player)event.getContents().getViewers().get(0);
 				}
 				//Get all 3 brewing stand potion lots content
@@ -219,8 +218,8 @@ public class Brewing implements Listener {
 					}
 				}
 				//If there is a viewer on the brewing stand send the restricted message
-				if (player != null && restricted == true) {
-					if (ingConsumed == false) {
+				if (player != null && restricted) {
+					if (!ingConsumed) {
 						player.getInventory().addItem(new ItemStack(ingredient.getType(), 1));
 					}
 					ir.getConfigHandler().printMessage(player, "chatMessages.brewingRestricted", reason);

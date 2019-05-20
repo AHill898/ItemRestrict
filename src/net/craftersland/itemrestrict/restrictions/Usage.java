@@ -46,7 +46,7 @@ public class Usage implements Listener {
 		final Player player = event.getPlayer();
 		ItemStack item = null;
 		ItemStack item2 = null;
-		if (ir.is19Server == false) {
+		if (!ir.is19Server) {
 			item = player.getItemInHand();
 		} else {
 			if (!isEventSafe(event.getPlayer().getName())) return;
@@ -63,8 +63,8 @@ public class Usage implements Listener {
 			event.setCancelled(true);
 			ir.getSoundHandler().sendPlingSound(player);
 			ir.getConfigHandler().printMessage(player, "chatMessages.ussageRestricted", bannedInfoInteractingBlock.reason);
-		} else if (ir.is19Server == false) {
-			if (event.isBlockInHand() == false) {
+		} else if (!ir.is19Server) {
+			if (!event.isBlockInHand()) {
 				if (ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, player, item.getType(), /*item.getDurability(), */player.getLocation()) == null) {
 					RestrictedItem bannedInfoMainHand = ir.getRestrictedItemsHandler().isBanned(ActionType.USAGE, player, item.getType(), /*item.getDurability(), */player.getLocation());
 					if (bannedInfoMainHand != null) {
@@ -87,8 +87,8 @@ public class Usage implements Listener {
 					}
 				}
 			}
-		} else if (ir.is19Server == true) {
-			if (event.isBlockInHand() == false) {
+		} else if (ir.is19Server) {
+			if (!event.isBlockInHand()) {
 				if (ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, player, item.getType(), /*item.getDurability(), */player.getLocation()) == null) {
 					RestrictedItem bannedInfoMainHand = ir.getRestrictedItemsHandler().isBanned(ActionType.USAGE, player, item.getType(), /*item.getDurability(), */player.getLocation());
 					if (bannedInfoMainHand != null) {
@@ -142,7 +142,7 @@ public class Usage implements Listener {
 		ItemStack item = player.getInventory().getItem(newSlot);
 		
 		if (item != null) {
-			if (item.getType().isBlock() == false) {
+			if (!item.getType().isBlock()) {
 				RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.OWNERSHIP, player, item.getType(), /*item.getDurability(), */player.getLocation());
 				
 				if (bannedInfo == null) {
@@ -172,7 +172,7 @@ public class Usage implements Listener {
 			if (bannedInfo != null) {
 				event.setCancelled(true);
 			}
-		} else if (ir.mcpcServer == false) {
+		} else if (!ir.mcpcServer) {
 			if (event.getDamager() instanceof Projectile) {
 				Projectile pr = (Projectile) event.getDamager();
 				if (pr.getShooter() instanceof Player) {

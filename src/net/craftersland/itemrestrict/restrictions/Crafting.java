@@ -19,7 +19,7 @@ public class Crafting implements Listener {
 	private void onItemCrafted(PrepareItemCraftEvent event) {
 		if (event.getRecipe() != null) {
 			ItemStack item = event.getRecipe().getResult();
-			if (event.getViewers().isEmpty() == false) {
+			if (!event.getViewers().isEmpty()) {
 				Player player = (Player) event.getViewers().get(0);
 				
 				RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.CRAFTING, player, item.getType(), /*item.getDurability(), */player.getLocation());

@@ -34,7 +34,7 @@ public class DisableRecipe {
 
 			@Override
 			public void run() {
-				if (ir.craftingDisabled.isEmpty() == false) {
+				if (!ir.craftingDisabled.isEmpty()) {
 					for (String s : ir.craftingDisabled) {
 						String[] s1 = s.split(":");
 						try {
@@ -65,7 +65,7 @@ public class DisableRecipe {
 
 			@Override
 			public void run() {
-				if (ir.disabledRecipes.isEmpty() == false) {
+				if (!ir.disabledRecipes.isEmpty()) {
 					for (Recipe r : ir.disabledRecipes) {
 						try {
 							Bukkit.addRecipe(r);

@@ -33,7 +33,7 @@ public class Ownership implements Listener {
 				ItemStack currentItem = event.getCurrentItem();
 				ItemStack cursorItem = event.getCursor();
 				
-				if (ir.getConfigHandler().getBoolean("General.Settings.OwnershipPlayerInvOnly") == true) {
+				if (ir.getConfigHandler().getBoolean("General.Settings.OwnershipPlayerInvOnly")) {
 					if (event.getInventory().getType() == InventoryType.PLAYER) {
 						inventoryClickRestriction(event, currentItem, player, false);
 					} else if (event.getRawSlot() >= event.getInventory().getSize()) {
@@ -49,7 +49,7 @@ public class Ownership implements Listener {
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onItemDrag(final InventoryDragEvent event) {
-		if (ir.getConfigHandler().getBoolean("General.Settings.OwnershipPlayerInvOnly") == true) {
+		if (ir.getConfigHandler().getBoolean("General.Settings.OwnershipPlayerInvOnly")) {
 			Player p = (Player) event.getWhoClicked();
 			ItemStack cursorItem = event.getOldCursor();
 			
@@ -93,7 +93,7 @@ public class Ownership implements Listener {
 						player.getInventory().setBoots(null);
 					}
 				}
-			} else if (removeCursorItem == true) {
+			} else if (removeCursorItem) {
 				player.setItemOnCursor(null);
 			} else {
 				player.getInventory().remove(currentItem);

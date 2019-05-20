@@ -16,8 +16,8 @@ public class MaterialCollection {
 	
 	//returns a MaterialInfo complete with the friendly material name from the config file
 	public RestrictedItem contains(RestrictedItem restrictedItem) {
-		for(int i = 0; i < this.materials.size(); i++) {
-			RestrictedItem thisMaterial = this.materials.get(i);
+		for(int i = 0; i < materials.size(); i++) {
+			RestrictedItem thisMaterial = materials.get(i);
 			if(restrictedItem.material == thisMaterial.material/* && (thisMaterial.allDataValues || material.data == thisMaterial.data)*/) {
 				return thisMaterial;
 			}
@@ -33,19 +33,19 @@ public class MaterialCollection {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		for(int i = 0; i < this.materials.size(); i++) {
-			stringBuilder.append(this.materials.get(i).toString() + " ");
+		for(int i = 0; i < materials.size(); i++) {
+			stringBuilder.append(materials.get(i).toString() + " ");
 		}
 		
 		return stringBuilder.toString();
 	}
 	
 	public int size() {
-		return this.materials.size();
+		return materials.size();
 	}
 
 	public void clear() {
-		this.materials.clear();
+		materials.clear();
 	}
 
 }

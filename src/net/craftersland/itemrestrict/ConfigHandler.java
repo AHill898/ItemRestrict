@@ -19,11 +19,11 @@ public class ConfigHandler {
 	
 	public void loadConfig() {
 		File pluginFolder = new File("plugins" + System.getProperty("file.separator") + ItemRestrict.pluginName);
-		if (pluginFolder.exists() == false) {
+		if (!pluginFolder.exists()) {
     		pluginFolder.mkdir();
     	}
 		File configFile = new File("plugins" + System.getProperty("file.separator") + ItemRestrict.pluginName + System.getProperty("file.separator") + "config.yml");
-		if (configFile.exists() == false) {
+		if (!configFile.exists()) {
 			ItemRestrict.log.info("No config file found! Creating new one...");
 			ir.saveDefaultConfig();
 		}
@@ -34,7 +34,7 @@ public class ConfigHandler {
     		ItemRestrict.log.severe("Could not load the config file! You need to regenerate the config! Error: " + e.getMessage());
 			e.printStackTrace();
     	}
-    	if (getBoolean("General.EnableOnAllWorlds") == true) {
+    	if (getBoolean("General.EnableOnAllWorlds")) {
     		ItemRestrict.log.info("Restrictions enabled on all worlds.");
     	} else {
     		getWorldsTask();
@@ -102,21 +102,17 @@ public class ConfigHandler {
 				//validate that list
 				ir.enforcementWorlds = new ArrayList<World>();
 				ItemRestrict.log.info("Scanning for loaded worlds...");
-				for(int i = 0; i < enabledWorlds.size(); i++)
-				{
+				for(int i = 0; i < enabledWorlds.size(); i++) {
 					String worldName = enabledWorlds.get(i);
 					World world = ir.getServer().getWorld(worldName);
-					if(world == null)
-					{
+					if(world == null) {
 						ItemRestrict.log.warning("Error: There's no world named " + worldName + ".  Please update your config.yml.");
 					}
-					else
-					{
+					else {
 						ir.enforcementWorlds.add(world);
 					}
 				}
-				if(enabledWorlds.size() == 0)
-				{			
+				if(enabledWorlds.size() == 0) {			
 					ItemRestrict.log.warning("No worlds found listed in config! Restrictions will not take place!");
 				}
 				//List the world names found.

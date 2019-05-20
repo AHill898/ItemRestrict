@@ -92,7 +92,7 @@ public class RestrictedItemsHandler {
 			//
 			//BLOCK BREAK BANS 
 			//
-			if (ir.getConfigHandler().getBoolean("General.Restrictions.BreakBans") == true) {
+			if (ir.getConfigHandler().getBoolean("General.Restrictions.BreakBans")) {
 				List<String> BlockBreakBanned = ymlFormat.getStringList("BlockBreakBanned");
 				//parse the strings from the config file
 				parseMaterialListFromConfig(BlockBreakBanned, ir.blockBreakBanned, "BlockBreakBanned");

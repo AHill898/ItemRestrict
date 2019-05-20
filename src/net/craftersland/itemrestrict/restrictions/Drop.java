@@ -17,7 +17,7 @@ public class Drop implements Listener {
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onItemDrop(PlayerDropItemEvent event) {
-		if (ir.getConfigHandler().getBoolean("General.Restrictions.DropBans") == true) {
+		if (ir.getConfigHandler().getBoolean("General.Restrictions.DropBans")) {
 			Player player = event.getPlayer();
 			ItemStack item = event.getItemDrop().getItemStack();
 			

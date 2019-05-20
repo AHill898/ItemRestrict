@@ -77,13 +77,13 @@ public class WorldScanner {
 		RestrictedItem bannedInfo = ir.worldBanned.contains(materialInfo);
 		boolean removeSkull = false;
 		if (bannedInfo == null) {
-			if (ir.getConfigHandler().getBoolean("General.RemoveSkulls") == true) {
+			if (ir.getConfigHandler().getBoolean("General.RemoveSkulls")) {
 				if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD) {
 					removeSkull = true;
 				}
 			}
 		}
-		if (bannedInfo != null || removeSkull == true) {
+		if (bannedInfo != null || removeSkull) {
 			Bukkit.getScheduler().runTask(ir, new Runnable() {
 				@Override
 				public void run() {

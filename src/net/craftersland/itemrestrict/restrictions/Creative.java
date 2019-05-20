@@ -20,7 +20,7 @@ public class Creative implements Listener {
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onCreativeEvents(InventoryCreativeEvent event) {
-		if (ir.getConfigHandler().getBoolean("General.Restrictions.CreativeBans") == true) {
+		if (ir.getConfigHandler().getBoolean("General.Restrictions.CreativeBans")) {
 			ItemStack cursorItem = event.getCursor();
 			
 			if (cursorItem != null) {
@@ -44,7 +44,7 @@ public class Creative implements Listener {
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onItemClicked(InventoryClickEvent event) {
-		if (ir.getConfigHandler().getBoolean("General.Restrictions.CreativeBans") == true) {
+		if (ir.getConfigHandler().getBoolean("General.Restrictions.CreativeBans")) {
 			if (event.getSlotType() != null) {
 				if (event.getCurrentItem() != null) {
 					Player p = (Player) event.getWhoClicked();

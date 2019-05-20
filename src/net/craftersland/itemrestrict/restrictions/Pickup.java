@@ -20,7 +20,7 @@ public class Pickup implements Listener {
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	private void onItemPickup(PlayerPickupItemEvent event) {
-		if (ir.getConfigHandler().getBoolean("General.Restrictions.PickupBans") == true) {
+		if (ir.getConfigHandler().getBoolean("General.Restrictions.PickupBans")) {
 			Player player = event.getPlayer();
 			ItemStack item = event.getItem().getItemStack();
 			
