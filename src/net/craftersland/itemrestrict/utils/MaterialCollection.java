@@ -18,9 +18,8 @@ public class MaterialCollection {
 	public RestrictedItem contains(RestrictedItem restrictedItem) {
 		for(int i = 0; i < materials.size(); i++) {
 			RestrictedItem thisMaterial = materials.get(i);
-			if(restrictedItem.material == thisMaterial.material/* && (thisMaterial.allDataValues || material.data == thisMaterial.data)*/) {
-				return thisMaterial;
-			}
+			
+			if(restrictedItem.material == thisMaterial.material/* && (thisMaterial.allDataValues || material.data == thisMaterial.data)*/) return thisMaterial;
 			/*else if(thisMaterial.material > material.material)
 			{
 				return null;				
@@ -33,9 +32,8 @@ public class MaterialCollection {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		for(int i = 0; i < materials.size(); i++) {
-			stringBuilder.append(materials.get(i).toString() + " ");
-		}
+		
+		for(int i = 0; i < materials.size(); i++) stringBuilder.append(materials.get(i).toString() + " ");
 		
 		return stringBuilder.toString();
 	}

@@ -84,11 +84,10 @@ public class ItemRestrict extends JavaPlugin {
         //Load Classes
         ws = new WorldScanner();
         es = new WearingScanner();
-        if (!is112Server) {
-        	ds = new DisableRecipe();
-        } else {
-        	log.warning("Removing recipes from the game is not possible in 1.12 due to a spigot bug: https://goo.gl/4v71Zv .Use CraftingBanned feature until this is fixed!");
-        }
+       
+        if (!is112Server) ds = new DisableRecipe();
+        else log.warning("Removing recipes from the game is not possible in 1.12 due to a spigot bug: https://goo.gl/4v71Zv .Use CraftingBanned feature until this is fixed!");
+        
         sH = new SoundHandler(this);
         
         //Register Listeners
@@ -144,9 +143,8 @@ public class ItemRestrict extends JavaPlugin {
         restrictedHandler = new RestrictedItemsHandler();
         
         //Restore recipes
-        if (!is112Server) {
-        	ds.restoreRecipes();
-        }
+        if (!is112Server) ds.restoreRecipes();
+        
         if (configHandler.getBoolean("General.WorldScannerON") && worldScanner.containsKey(false)) {
         	ws.worldScanTask();
         } else if (!configHandler.getBoolean("General.WorldScannerON") && worldScanner.containsKey(true)) {
@@ -154,6 +152,7 @@ public class ItemRestrict extends JavaPlugin {
         	worldScanner.clear();
         	worldScanner.put(false, 0);
         }
+        
         if (configHandler.getBoolean("General.Restrictions.ArmorWearingBans") && wearingScanner.containsKey(false)) {
         	es.wearingScanTask();
         } else if (!configHandler.getBoolean("General.Restrictions.ArmorWearingBans") && wearingScanner.containsKey(true)) {
@@ -163,11 +162,8 @@ public class ItemRestrict extends JavaPlugin {
         }
         
         //Disable Recipes Task
-        if (!is112Server) {
-        	ds.disableRecipesTask(1);
-        } else {
-        	log.warning("Removing recipes from the game is not possible in 1.12 due to a spigot bug: https://goo.gl/4v71Zv .Use CraftingBanned feature until this is fixed!");
-        }
+        if (!is112Server) ds.disableRecipesTask(1);
+        else log.warning("Removing recipes from the game is not possible in 1.12 due to a spigot bug: https://goo.gl/4v71Zv .Use CraftingBanned feature until this is fixed!");
         
         printConsoleStatus();
         
@@ -182,41 +178,26 @@ public class ItemRestrict extends JavaPlugin {
 	}
 	
 	private void printConsoleStatus() {
-		if (configHandler.getBoolean("General.Restrictions.EnableBrewingBans")) {
-    		log.info("Brewing restrictions enabled!");
-    	} else {
-    		log.info("Brewing restrictions disabled!");
-    	}
-        if (configHandler.getBoolean("General.Restrictions.ArmorWearingBans")) {
-    		log.info("Wearing restrictions enabled!");
-    	} else {
-    		log.info("Wearing restrictions disabled!");
-    	}
-        if (configHandler.getBoolean("General.Restrictions.CreativeBans")) {
-    		log.info("Creative restrictions enabled!");
-    	} else {
-    		log.info("Creative restrictions disabled!");
-    	}
-        if (configHandler.getBoolean("General.Restrictions.PickupBans")) {
-    		log.info("Pickup restrictions enabled!");
-    	} else {
-    		log.info("Pickup restrictions disabled!");
-    	}
-        if (configHandler.getBoolean("General.Restrictions.DropBans")) {
-    		log.info("Drop restrictions enabled!");
-    	} else {
-    		log.info("Drop restrictions disabled!");
-    	}
-        if (configHandler.getBoolean("General.Restrictions.BreakBans")) {
-    		log.info("Block break restrictions enabled!");
-    	} else {
-    		log.info("Block break restrictions disabled!");
-    	}
-        if (configHandler.getBoolean("General.WorldScannerON")) {
-    		log.info("WorldScanner is enabled!");
-		} else {
-			log.info("WorldScanner is disabled!");
-		}
+		if (configHandler.getBoolean("General.Restrictions.EnableBrewingBans")) log.info("Brewing restrictions enabled!");
+    	else log.info("Brewing restrictions disabled!");
+		
+        if (configHandler.getBoolean("General.Restrictions.ArmorWearingBans")) log.info("Wearing restrictions enabled!");
+    	else log.info("Wearing restrictions disabled!");
+        
+        if (configHandler.getBoolean("General.Restrictions.CreativeBans")) log.info("Creative restrictions enabled!");
+    	else log.info("Creative restrictions disabled!");
+        
+        if (configHandler.getBoolean("General.Restrictions.PickupBans")) log.info("Pickup restrictions enabled!");
+    	else log.info("Pickup restrictions disabled!");
+        
+        if (configHandler.getBoolean("General.Restrictions.DropBans")) log.info("Drop restrictions enabled!");
+    	else log.info("Drop restrictions disabled!");
+        
+        if (configHandler.getBoolean("General.Restrictions.BreakBans")) log.info("Block break restrictions enabled!");
+    	else log.info("Block break restrictions disabled!");
+        
+        if (configHandler.getBoolean("General.WorldScannerON")) log.info("WorldScanner is enabled!");
+		else log.info("WorldScanner is disabled!");
 	}
 	
 	private void checkServerVersion() {
@@ -237,12 +218,15 @@ public class ItemRestrict extends JavaPlugin {
 	public ConfigHandler getConfigHandler() {
 		return configHandler;
 	}
+	
 	public RestrictedItemsHandler getRestrictedItemsHandler() {
 		return restrictedHandler;
 	}
+	
 	public DisableRecipe getDisableRecipe() {
 		return ds;
 	}
+	
 	public SoundHandler getSoundHandler() {
 		return sH;
 	}

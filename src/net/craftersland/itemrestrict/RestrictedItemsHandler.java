@@ -156,9 +156,7 @@ public class RestrictedItemsHandler {
 			}
 			
 			//otherwise store the valid entry in config data
-			else {
-				materialCollection.add(restrictedItem);
-			}
+			else materialCollection.add(restrictedItem);
 		}		
 	}
 	

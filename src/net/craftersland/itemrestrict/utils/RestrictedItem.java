@@ -18,22 +18,6 @@ public class RestrictedItem {
 		this.reason = reason;
 	}
 	
-	/*public RestrictedItem(int typeID, String description, String reason) {
-		this.typeID = typeID;
-		//this.data = 0;
-		this.allDataValues = true;
-		this.description = description;
-		this.reason = reason;
-	}*/
-	
-	private RestrictedItem(Material material, /*short data, */boolean allDataValues, String description, String reason) {
-		this.material = material;
-		//this.data = data;
-		this.allDataValues = allDataValues;
-		this.description = description;
-		this.reason = reason;
-	}
-	
 	@Override
 	public String toString() {
 		//String returnValue = String.valueOf(this.typeID) + ":" + (this.allDataValues ? "*" : String.valueOf(this.data));

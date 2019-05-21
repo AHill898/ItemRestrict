@@ -26,12 +26,10 @@ public class WorldScanner {
 			public void run() {
 				ItemRestrict.log.info("WorldScanner Task Started...");
 				ArrayList<World> worlds;
+				
 				if(ir.worldBanned.size() > 0) {
-					if (ir.enforcementWorlds.size() == 0) {
-						worlds = (ArrayList<World>) Bukkit.getServer().getWorlds();
-					} else {
-						worlds = ir.enforcementWorlds;
-					}
+					if (ir.enforcementWorlds.size() == 0) worlds = (ArrayList<World>) Bukkit.getServer().getWorlds();
+					else worlds = ir.enforcementWorlds;
 					
 					for(int i = 0; i < worlds.size(); i++) {
 						World world = worlds.get(i);
@@ -78,9 +76,7 @@ public class WorldScanner {
 		boolean removeSkull = false;
 		if (bannedInfo == null) {
 			if (ir.getConfigHandler().getBoolean("General.RemoveSkulls")) {
-				if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD) {
-					removeSkull = true;
-				}
+				if (block.getType() == Material.PLAYER_HEAD || block.getType() == Material.PLAYER_WALL_HEAD) removeSkull = true;
 			}
 		}
 		if (bannedInfo != null || removeSkull) {
@@ -91,12 +87,12 @@ public class WorldScanner {
 				}
 				
 			});
+			
 			String msg;
-			if (bannedInfo != null) {
-				msg = bannedInfo.toString();
-			} else {
-				msg = "skull";
-			}
+			
+			if (bannedInfo != null) msg = bannedInfo.toString();
+			else msg = "skull";
+			
 			ItemRestrict.log.info("Removed " + msg + " @ " + getFriendlyLocationString(block.getLocation()));
 		}
 	}

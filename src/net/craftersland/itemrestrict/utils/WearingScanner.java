@@ -39,6 +39,7 @@ public class WearingScanner {
 							});
 						}
 					}
+					
 					if (leggings != null) {
 						RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.WEARING, player, leggings.getType(), /*leggings.getData().getData(), */player.getLocation());
 						if (bannedInfo != null) {
@@ -54,6 +55,7 @@ public class WearingScanner {
 							});
 						}
 					}
+					
 					if (chestplate != null) {
 						RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.WEARING, player, chestplate.getType(), /*chestplate.getData().getData(), */player.getLocation());
 						if (bannedInfo != null) {
@@ -69,6 +71,7 @@ public class WearingScanner {
 							});
 						}
 					}
+					
 					if (helmet != null) {
 						RestrictedItem bannedInfo = ir.getRestrictedItemsHandler().isBanned(ActionType.WEARING, player, helmet.getType(), /*helmet.getData().getData(), */player.getLocation());
 						if (bannedInfo != null) {
@@ -87,6 +90,7 @@ public class WearingScanner {
 				}
 			}
 		}, 20L, 20L);
+		
 		ir.wearingScanner.clear();
 		ir.wearingScanner.put(true, task.getTaskId());
 	}

@@ -67,9 +67,7 @@ public class ItemRestrictCommand implements CommandExecutor {
 				player = (Player) sender;
 				itemrestrict.getConfigHandler().printMessage(player, "chatMessages.unknownCommand", "");
 				itemrestrict.getSoundHandler().sendPlingSound(player);
-			} else {
-				sender.sendMessage(ChatColor.RED + "Unknown command for help do /itemrestrict");
-			}
+			} else sender.sendMessage(ChatColor.RED + "Unknown command for help do /itemrestrict");
 		}
 		
 		return false;
@@ -77,9 +75,7 @@ public class ItemRestrictCommand implements CommandExecutor {
 	
 	//Player help page
 	public void sendHelp(Player p) {
-		if (itemrestrict.getConfigHandler().getString("General.Sounds.onCommands").matches("true")) {
-			itemrestrict.getSoundHandler().sendAnvilLandSound(p);
-		}
+		if (itemrestrict.getConfigHandler().getString("General.Sounds.onCommands").matches("true")) itemrestrict.getSoundHandler().sendAnvilLandSound(p);
 		
 		p.sendMessage(" ");
 		p.sendMessage(ChatColor.DARK_RED + "-=-=-=-=-=-=-=-=-=-< " + ChatColor.RED + "" + ChatColor.BOLD + "ItemRestrict" + ChatColor.DARK_RED + " >-=-=-=-=-=-=-=-=-=-");
@@ -104,12 +100,12 @@ public class ItemRestrictCommand implements CommandExecutor {
 	public void sendConsoleHelp(CommandSender sender) {
 		sender.sendMessage(" ");
 		sender.sendMessage(ChatColor.DARK_RED + "-=-=-=-=-=-=-=-=-=-< " + ChatColor.RED + "" + ChatColor.BOLD + "ItemRestrict" + ChatColor.DARK_RED + " >-=-=-=-=-=-=-=-=-=-");
-			sender.sendMessage(" ");
-			sender.sendMessage(ChatColor.RED + "        Reload plugin config and RestrictedItems list:");
-			sender.sendMessage(ChatColor.DARK_GRAY + ">> " + ChatColor.WHITE + "/itemrestrict reload");
-			sender.sendMessage(" ");
-			sender.sendMessage(ChatColor.DARK_RED + "-=-=-=-=-=-=-=-=-< " + ChatColor.RED + "" + ChatColor.BOLD + "Console Help Page" + ChatColor.DARK_RED + " >-=-=-=-=-=-=-=-=-");
-			sender.sendMessage(" ");
+		sender.sendMessage(" ");
+		sender.sendMessage(ChatColor.RED + "        Reload plugin config and RestrictedItems list:");
+		sender.sendMessage(ChatColor.DARK_GRAY + ">> " + ChatColor.WHITE + "/itemrestrict reload");
+		sender.sendMessage(" ");
+		sender.sendMessage(ChatColor.DARK_RED + "-=-=-=-=-=-=-=-=-< " + ChatColor.RED + "" + ChatColor.BOLD + "Console Help Page" + ChatColor.DARK_RED + " >-=-=-=-=-=-=-=-=-");
+		sender.sendMessage(" ");
 	}
 
 }

@@ -34,38 +34,29 @@ public class ConfigHandler {
     		ItemRestrict.log.severe("Could not load the config file! You need to regenerate the config! Error: " + e.getMessage());
 			e.printStackTrace();
     	}
-    	if (getBoolean("General.EnableOnAllWorlds")) {
-    		ItemRestrict.log.info("Restrictions enabled on all worlds.");
-    	} else {
-    		getWorldsTask();
-    	}
+    	if (getBoolean("General.EnableOnAllWorlds")) ItemRestrict.log.info("Restrictions enabled on all worlds.");
+    	else getWorldsTask();
 	}
 	
 	public String getString(String key) {
 		if (!ir.getConfig().contains(key)) {
 			ir.getLogger().severe("Could not locate " + key + " in the config.yml inside of the " + ItemRestrict.pluginName + " folder! (Try generating a new one by deleting the current)");
 			return "errorCouldNotLocateInConfigYml:" + key;
-		} else {
-			return ir.getConfig().getString(key);
-		}
+		} else return ir.getConfig().getString(key);
 	}
 	
 	public Integer getInteger(String key) {
 		if (!ir.getConfig().contains(key)) {
 			ir.getLogger().severe("Could not locate " + key + " in the config.yml inside of the " + ItemRestrict.pluginName + " folder! (Try generating a new one by deleting the current)");
 			return null;
-		} else {
-			return ir.getConfig().getInt(key);
-		}
+		} else return ir.getConfig().getInt(key);
 	}
 	
 	public Boolean getBoolean(String key) {
 		if (!ir.getConfig().contains(key)) {
 			ir.getLogger().severe("Could not locate " + key + " in the config.yml inside of the " + ItemRestrict.pluginName + " folder! (Try generating a new one by deleting the current)");
 			return null;
-		} else {
-			return ir.getConfig().getBoolean(key);
-		}
+		} else return ir.getConfig().getBoolean(key);
 	}
 	
 	//Send chat messages from config
@@ -74,14 +65,11 @@ public class ConfigHandler {
 			List<String> message = new ArrayList<String>();
 			message.add(ir.getConfig().getString(messageKey));
 			
-			if (reason != null) {
-				message.set(0, message.get(0).replaceAll("%reason", "" + reason));
-			}
+			if (reason != null) message.set(0, message.get(0).replaceAll("%reason", "" + reason));
 			
-			if (p != null) {				
-				//Message format
-				p.sendMessage(getString("chatMessages.prefix").replaceAll("&", "§") + message.get(0).replaceAll("&", "§"));
-			}		
+			//Message format
+			if (p != null) p.sendMessage(getString("chatMessages.prefix").replaceAll("&", "§") + message.get(0).replaceAll("&", "§"));
+			
 		} else {
 			ir.getLogger().severe("Could not locate '"+messageKey+"' in the config.yml inside of the ItemRestrict folder!");
 			p.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + ">> " + ChatColor.RED + "Could not locate '"+messageKey+"' in the config.yml inside of the ItemRestrict folder!");
@@ -102,24 +90,19 @@ public class ConfigHandler {
 				//validate that list
 				ir.enforcementWorlds = new ArrayList<World>();
 				ItemRestrict.log.info("Scanning for loaded worlds...");
+				
 				for(int i = 0; i < enabledWorlds.size(); i++) {
 					String worldName = enabledWorlds.get(i);
 					World world = ir.getServer().getWorld(worldName);
-					if(world == null) {
-						ItemRestrict.log.warning("Error: There's no world named " + worldName + ".  Please update your config.yml.");
-					}
-					else {
-						ir.enforcementWorlds.add(world);
-					}
+					if(world == null) ItemRestrict.log.warning("Error: There's no world named " + worldName + ".  Please update your config.yml.");
+					else ir.enforcementWorlds.add(world);
 				}
-				if(enabledWorlds.size() == 0) {			
-					ItemRestrict.log.warning("No worlds found listed in config! Restrictions will not take place!");
-				}
+				
+				if(enabledWorlds.size() == 0) ItemRestrict.log.warning("No worlds found listed in config! Restrictions will not take place!");
 				//List the world names found.
 				ArrayList<String> worldNames = new ArrayList<String>();
-				for (World x : ir.enforcementWorlds) {
-					worldNames.add(x.getName());
-				}
+				for (World x : ir.enforcementWorlds) worldNames.add(x.getName());
+				
 				ItemRestrict.log.info("Plugin enabled on worlds: " + worldNames.toString());
 			}
 			
